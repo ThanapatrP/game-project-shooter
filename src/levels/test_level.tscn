@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcnmonal0ebkm"]
+
+[ext_resource type="PackedScene" uid="uid://c2uvr2f2eld2n" path="res://src/characters/player/player.tscn" id="1_1ky7t"]
+[ext_resource type="PackedScene" uid="uid://dolcvif2pycvo" path="res://src/characters/enemy/running_enemy.tscn" id="2_6o3kl"]
+
+[node name="TestLevel" type="Node2D"]
+y_sort_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -99
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 324.0
+offset_bottom = 184.0
+color = Color(0.0846899, 0.0846899, 0.0846899, 1)
+
+[node name="Player" parent="." instance=ExtResource("1_1ky7t")]
+position = Vector2(115, 105)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0, 0, 0, 1)
+
+[node name="RunningEnemy" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(210, 146)
+
+[node name="RunningEnemy2" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(125, 160)
+
+[node name="RunningEnemy3" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(60, 125)
+
+[node name="RunningEnemy4" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(33, 77)
+
+[node name="RunningEnemy5" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(85, 46)
+
+[node name="RunningEnemy6" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(104, 117)
+
+[node name="RunningEnemy7" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(163, 125)
+
+[node name="RunningEnemy8" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(224, 87)
+
+[node name="RunningEnemy9" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(282, 112)
+
+[node name="RunningEnemy10" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(278, 50)
