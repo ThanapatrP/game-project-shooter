@@ -9,12 +9,13 @@ light_mode = 1
 radius = 2.0
 height = 10.0
 
-[sub_resource type="Gradient" id="Gradient_5c1al"]
+[sub_resource type="Gradient" id="Gradient_bxhu7"]
+interpolation_mode = 1
 offsets = PackedFloat32Array(0.37013, 0.675325)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_5c1al"]
-gradient = SubResource("Gradient_5c1al")
+gradient = SubResource("Gradient_bxhu7")
 width = 32
 height = 32
 fill = 1
@@ -42,6 +43,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_bxhu7")
 
 [node name="SelfLight" type="PointLight2D" parent="."]
+visible = false
 scale = Vector2(2.25, 2.25)
 energy = 2.0
 shadow_enabled = true
@@ -51,4 +53,5 @@ texture = SubResource("GradientTexture2D_5c1al")
 
 [node name="PointLight2D" type="PointLight2D" parent="LightPivot"]
 energy = 2.0
+blend_mode = 2
 texture = SubResource("GradientTexture2D_5c1al")
