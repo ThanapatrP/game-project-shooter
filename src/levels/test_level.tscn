@@ -16,37 +16,103 @@ color = Color(0.0846899, 0.0846899, 0.0846899, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_1ky7t")]
 unique_name_in_owner = true
-position = Vector2(115, 105)
+position = Vector2(154, 81)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0, 0, 0, 1)
 
 [node name="RunningEnemy" parent="." instance=ExtResource("2_6o3kl")]
-position = Vector2(210, 146)
+position = Vector2(243, 155)
 
 [node name="RunningEnemy2" parent="." instance=ExtResource("2_6o3kl")]
-position = Vector2(125, 160)
+position = Vector2(275, 123)
 
 [node name="RunningEnemy3" parent="." instance=ExtResource("2_6o3kl")]
-position = Vector2(60, 125)
+position = Vector2(293, 81)
 
 [node name="RunningEnemy4" parent="." instance=ExtResource("2_6o3kl")]
-position = Vector2(33, 77)
+position = Vector2(287, 28)
 
 [node name="RunningEnemy5" parent="." instance=ExtResource("2_6o3kl")]
-position = Vector2(85, 46)
+position = Vector2(254, 6)
 
 [node name="RunningEnemy6" parent="." instance=ExtResource("2_6o3kl")]
-position = Vector2(104, 117)
+position = Vector2(191, -7)
 
 [node name="RunningEnemy7" parent="." instance=ExtResource("2_6o3kl")]
-position = Vector2(163, 125)
+position = Vector2(139, -18)
 
 [node name="RunningEnemy8" parent="." instance=ExtResource("2_6o3kl")]
-position = Vector2(224, 87)
+position = Vector2(87, -4)
 
 [node name="RunningEnemy9" parent="." instance=ExtResource("2_6o3kl")]
-position = Vector2(282, 112)
+position = Vector2(43, 13)
 
 [node name="RunningEnemy10" parent="." instance=ExtResource("2_6o3kl")]
-position = Vector2(278, 50)
+position = Vector2(15, 37)
+
+[node name="RunningEnemy11" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(7, 75)
+
+[node name="RunningEnemy12" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(27, 123)
+
+[node name="RunningEnemy13" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(57, 151)
+
+[node name="RunningEnemy14" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(86, 167)
+
+[node name="RunningEnemy15" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(154, 172)
+
+[node name="RunningEnemy16" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(189, 170)
+
+[node name="RunningEnemy17" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(67, 195)
+
+[node name="RunningEnemy18" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(15, 162)
+
+[node name="RunningEnemy19" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(-18, 107)
+
+[node name="RunningEnemy20" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(-35, 22)
+
+[node name="RunningEnemy21" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(23, -28)
+
+[node name="RunningEnemy22" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(23, -28)
+
+[node name="RunningEnemy23" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(112, -61)
+
+[node name="RunningEnemy24" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(210, -46)
+
+[node name="RunningEnemy25" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(291, -32)
+
+[node name="RunningEnemy26" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(343, 17)
+
+[node name="RunningEnemy27" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(350, 82)
+
+[node name="RunningEnemy28" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(322, 152)
+
+[node name="RunningEnemy29" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(266, 213)
+
+[node name="RunningEnemy30" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(163, 221)
+
+[node name="RunningEnemy31" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(163, 221)
+
+[node name="RunningEnemy32" parent="." instance=ExtResource("2_6o3kl")]
+position = Vector2(115, 216)

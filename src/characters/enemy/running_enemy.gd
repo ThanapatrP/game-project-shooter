@@ -23,14 +23,16 @@ func _process(delta):
 
 func _physics_process(delta):
 	if follow != null:
-		velocity = global_position.direction_to(follow.global_position) * SPD
+		velocity = lerp(velocity, global_position.direction_to(follow.global_position) * SPD, 0.1)
 	else:
 		velocity = Vector2.ZERO
 	
 	move_and_slide()
 
 
-func hurt(damage):
+func hurt(kb_dir, damage):
+	velocity = kb_dir * SPD * 3
+
 	hp -= damage
 
 	flashing_t = 0.04

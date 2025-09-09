@@ -3,7 +3,7 @@ extends Area2D
 
 const SPD = 600
 var dir = Vector2.ZERO
-var damage = 30
+var damage = 50
 
 
 func _ready() -> void:
@@ -18,5 +18,5 @@ func _physics_process(delta):
 
 func hit(body):
 	if body is CharacterBody2D:
-		body.hurt(damage)
+		body.hurt(dir, damage)
 		queue_free()
