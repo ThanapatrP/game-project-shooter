@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-const SPD = 20
+var spd = 20
 var hp = 100
 var flashing_t = 0.0
 
@@ -9,6 +9,10 @@ var follow = null
 
 
 func _process(delta):
+
+	if($PositionMarker.color.a > 0):
+		$PositionMarker.color.a = lerp($PositionMarker.color.a, 0.0, 0.1)
+
 	if follow == null:
 		if get_tree().current_scene.get_node_or_null("%Player"):
 			follow = get_tree().current_scene.get_node_or_null("%Player")
@@ -23,7 +27,7 @@ func _process(delta):
 
 func _physics_process(delta):
 	if follow != null:
-		velocity = lerp(velocity, global_position.direction_to(follow.global_position) * SPD, 0.1)
+		velocity = lerp(velocity, global_position.direction_to(follow.global_position) * spd, 0.1)
 	else:
 		velocity = Vector2.ZERO
 	
@@ -31,11 +35,13 @@ func _physics_process(delta):
 
 
 func hurt(kb_dir, damage):
-	velocity = kb_dir * SPD * 3
+	velocity = kb_dir * spd * 3
 
 	hp -= damage
 
 	flashing_t = 0.04
+
+	spd *= 1.1
 
 	if hp <= 0.0:
 		queue_free()

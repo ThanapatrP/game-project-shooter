@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dolcvif2pycvo"]
+[gd_scene load_steps=5 format=3 uid="uid://dolcvif2pycvo"]
 
 [ext_resource type="Script" uid="uid://dut2aikrhno42" path="res://src/characters/enemy/running_enemy.gd" id="1_1utja"]
 
@@ -8,6 +8,9 @@ light_mode = 1
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1utja"]
 radius = 5.0
 height = 10.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1utja"]
+light_mode = 1
 
 [node name="RunningEnemy" type="CharacterBody2D"]
 collision_layer = 4
@@ -33,3 +36,9 @@ offset_bottom = 5.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_1utja")
+
+[node name="PositionMarker" type="Polygon2D" parent="."]
+material = SubResource("CanvasItemMaterial_1utja")
+scale = Vector2(0.03125, 0.03125)
+color = Color(0.698039, 0.341176, 0.247059, 1)
+polygon = PackedVector2Array(-160, -160, -128, -128, -128, 128, 128, 128, 128, -128, -128, -128, -160, -160, 160, -160, 160, 160, -160, 160)
