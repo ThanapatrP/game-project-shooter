@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bcnmonal0ebkm"]
+[gd_scene load_steps=5 format=3 uid="uid://bcnmonal0ebkm"]
 
 [ext_resource type="PackedScene" uid="uid://c2uvr2f2eld2n" path="res://src/characters/player/player.tscn" id="1_1ky7t"]
 [ext_resource type="Script" uid="uid://dlkm2ubumia7v" path="res://src/levels/spawner.gd" id="2_6o3kl"]
+[ext_resource type="Script" uid="uid://djtoury4cj4ex" path="res://src/levels/hp_bar_pivot.gd" id="3_hdcac"]
+[ext_resource type="Script" uid="uid://c65tq4spr5dxh" path="res://src/levels/ammo_label.gd" id="4_br53r"]
 
 [node name="TestLevel" type="Node2D"]
 y_sort_enabled = true
@@ -23,3 +25,21 @@ color = Color(0, 0, 0, 1)
 
 [node name="Spawner" type="Node" parent="."]
 script = ExtResource("2_6o3kl")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HpBarPivot" type="Node2D" parent="CanvasLayer"]
+script = ExtResource("3_hdcac")
+
+[node name="HpBar" type="ColorRect" parent="CanvasLayer/HpBarPivot"]
+offset_right = 320.0
+offset_bottom = 3.0
+color = Color(0, 0.729565, 0.0597753, 1)
+
+[node name="AmmoLabel" type="Label" parent="CanvasLayer"]
+offset_left = 273.0
+offset_top = 154.0
+offset_right = 316.0
+offset_bottom = 177.0
+text = "30/30"
+script = ExtResource("4_br53r")

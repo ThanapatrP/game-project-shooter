@@ -5,12 +5,16 @@ extends CharacterBody2D
 const SPD = 80.0
 var p_input := Vector2.ZERO
 
+
 const LIGHT_RES := 128
-const DEF_LIGHT_SCALE = 40
+const DEF_LIGHT_SCALE = 64
 const PLAYER_LIGHT_SCALE = 48
 var mouse_pos : Vector2 = Vector2.ZERO
 var mouse_rad := 0.0
 var mouse_dir : Vector2 = Vector2.ZERO
+
+
+var hp = 100
 
 
 const DEF_SHOOT_CD = 0.1
