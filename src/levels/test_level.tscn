@@ -10,10 +10,10 @@ y_sort_enabled = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = -99
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 324.0
-offset_bottom = 184.0
+offset_left = -19.0
+offset_top = -18.0
+offset_right = 338.0
+offset_bottom = 197.0
 color = Color(0.0846899, 0.0846899, 0.0846899, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_1ky7t")]
@@ -37,9 +37,9 @@ offset_bottom = 3.0
 color = Color(0, 0.729565, 0.0597753, 1)
 
 [node name="AmmoLabel" type="Label" parent="CanvasLayer"]
-offset_left = 273.0
+offset_left = 248.0
 offset_top = 154.0
-offset_right = 316.0
+offset_right = 291.0
 offset_bottom = 177.0
 text = "30/30"
 script = ExtResource("4_br53r")

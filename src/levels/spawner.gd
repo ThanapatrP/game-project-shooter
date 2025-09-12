@@ -1,6 +1,6 @@
 extends Node
 
-var spawn_cd = [1,2]
+var spawn_cd = [1.5,3]
 var spawn_count = [2,5]
 
 var enemy_scene = preload("res://src/characters/enemy/running_enemy.tscn")

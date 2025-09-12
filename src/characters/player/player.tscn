@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c2uvr2f2eld2n"]
+[gd_scene load_steps=7 format=3 uid="uid://c2uvr2f2eld2n"]
 
 [ext_resource type="Script" uid="uid://uk7ms7e3jxl7" path="res://src/characters/player/player.gd" id="1_7nd6e"]
 
@@ -22,6 +22,9 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 1)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bxhu7"]
+size = Vector2(4, 4)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_7nd6e")
 
@@ -30,6 +33,7 @@ offset_left = -5.0
 offset_top = -5.0
 offset_right = 5.0
 offset_bottom = 5.0
+metadata/_edit_use_anchors_ = true
 
 [node name="PositionMarker" type="Polygon2D" parent="."]
 material = SubResource("CanvasItemMaterial_bxhu7")
@@ -55,3 +59,10 @@ texture = SubResource("GradientTexture2D_5c1al")
 energy = 2.0
 blend_mode = 2
 texture = SubResource("GradientTexture2D_5c1al")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_bxhu7")
