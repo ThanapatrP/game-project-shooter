@@ -1,0 +1,79 @@
+[gd_scene load_steps=8 format=3 uid="uid://bcnmonal0ebkm"]
+
+[ext_resource type="PackedScene" uid="uid://c2uvr2f2eld2n" path="res://src/characters/player/player.tscn" id="1_b6xw5"]
+[ext_resource type="Script" uid="uid://dlkm2ubumia7v" path="res://src/levels/spawner.gd" id="2_ctyfj"]
+[ext_resource type="Script" uid="uid://djtoury4cj4ex" path="res://src/levels/hp_bar_pivot.gd" id="3_11df1"]
+[ext_resource type="Script" uid="uid://c65tq4spr5dxh" path="res://src/levels/ammo_label.gd" id="4_k0jp4"]
+[ext_resource type="Script" uid="uid://0rf7u1t2yp73" path="res://src/util/custom_camera.gd" id="5_ctyfj"]
+
+[sub_resource type="SystemFont" id="SystemFont_ctyfj"]
+font_names = PackedStringArray("Courier Prime")
+font_weight = 999
+subpixel_positioning = 0
+keep_rounding_remainders = false
+oversampling = 2.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_ctyfj"]
+font = SubResource("SystemFont_ctyfj")
+shadow_size = 0
+
+[node name="Level" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
+anchor_mode = 0
+script = ExtResource("5_ctyfj")
+
+[node name="BG" type="ColorRect" parent="."]
+z_index = -99
+offset_left = -102.0
+offset_top = -78.0
+offset_right = 658.0
+offset_bottom = 478.0
+color = Color(0.221902, 0.221902, 0.221902, 1)
+
+[node name="Player" parent="." instance=ExtResource("1_b6xw5")]
+unique_name_in_owner = true
+position = Vector2(240, 249)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0, 0, 0, 1)
+
+[node name="Spawner" type="Node" parent="."]
+script = ExtResource("2_ctyfj")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HpBarPivot" type="Node2D" parent="UI"]
+position = Vector2(11, 364)
+script = ExtResource("3_11df1")
+metadata/_edit_group_ = true
+
+[node name="HpBarDropShadow" type="ColorRect" parent="UI/HpBarPivot"]
+offset_top = 1.0
+offset_right = 103.0
+offset_bottom = 17.0
+
+[node name="HpBar" type="ColorRect" parent="UI/HpBarPivot"]
+offset_left = 1.0
+offset_right = 104.0
+offset_bottom = 16.0
+color = Color(0, 0.729565, 0.0597753, 1)
+
+[node name="AmmoLabel" type="Label" parent="UI"]
+offset_left = 498.0
+offset_top = 356.0
+offset_right = 541.0
+offset_bottom = 379.0
+text = "30/30"
+script = ExtResource("4_k0jp4")
+
+[node name="ScoreLabel" type="Label" parent="UI"]
+offset_top = 12.0
+offset_right = 550.0
+offset_bottom = 35.0
+text = "SCORE: XXXX"
+label_settings = SubResource("LabelSettings_ctyfj")
+horizontal_alignment = 1
+vertical_alignment = 1

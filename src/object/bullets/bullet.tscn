@@ -6,12 +6,12 @@
 light_mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bq0wm"]
-size = Vector2(12, 4)
+size = Vector2(18, 6)
 
 [sub_resource type="Gradient" id="Gradient_5c1al"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0.376623, 0.681818)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+offsets = PackedFloat32Array(0.253275, 0.480349, 0.703057, 0.899563)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.686275, 1, 1, 1, 0.380392, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ohibe"]
 gradient = SubResource("Gradient_5c1al")
@@ -28,16 +28,31 @@ script = ExtResource("1_ohibe")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("CanvasItemMaterial_ohibe")
-offset_left = -6.0
-offset_top = -2.0
-offset_right = 6.0
-offset_bottom = 2.0
+offset_left = -9.0
+offset_top = -3.0
+offset_right = 9.0
+offset_bottom = 3.0
 color = Color(1, 0.709804, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+material = SubResource("CanvasItemMaterial_ohibe")
+offset_left = -4.0
+offset_top = -3.0
+offset_right = 8.0
+offset_bottom = 3.0
+color = Color(1, 0.95, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+material = SubResource("CanvasItemMaterial_ohibe")
+offset_left = -1.0
+offset_top = -2.0
+offset_right = 7.0
+offset_bottom = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_bq0wm")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 scale = Vector2(1.4375, 0.75)
-energy = 1.5
+blend_mode = 2
 texture = SubResource("GradientTexture2D_ohibe")

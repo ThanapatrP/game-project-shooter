@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-var spd = 20
+var spd = 40
 var hp = 100
 var flashing_t = 0.0
 

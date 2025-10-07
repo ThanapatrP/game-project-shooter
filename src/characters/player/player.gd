@@ -1,78 +1,104 @@
-class_name PttPlayer
+class_name Player
 extends CharacterBody2D
 
 
-const SPD = 80.0
+# Movement stuff
+const SPD = 100.0
 var p_input := Vector2.ZERO
+var added_velo : Vector2 = Vector2.ZERO
 
 
-const LIGHT_RES := 128
-const DEF_LIGHT_SCALE = 84
-const PLAYER_LIGHT_SCALE = 48
+# Mouse stuff
 var mouse_pos : Vector2 = Vector2.ZERO
 var mouse_rad := 0.0
 var mouse_dir : Vector2 = Vector2.ZERO
 
 
+# HP stuff
 var hp = 100
 var invin = -1.0
 
 
+# Shoot stuff
 const DEF_SHOOT_CD = 0.1
 var shoot_cd = 0.0
-var RELOAD_T = 0.8
-var reload_cd = -1.0
+var RELOAD_T = 0.8 # default / max reload cooldown
+var reload_cd = -1.0 # currect cooldown of reload
 var ammo = 40
 
 
-const DEF_LIGHT_POW = 4.5
+# Light stuff
+const DEF_LIGHT_POW = 3.5 # how long light will last in second (max)
+const LIGHT_RES := 256 # size of light texture
+const ACTIVE_LIGHT_SCALE = 128 + 32
+const PLAYER_LIGHT_SCALE = 64+16
 var light_pow = 0.0
 var light_active = true
 
 
+# Resources
 var bullet_res = preload("res://src/object/bullets/bullet.tscn")
 
 
+# Node ref
+@onready var light_pivot := $LightPivot
+@onready var point_light := $LightPivot/PointLight2D
+
+
 func _ready():
-	$LightPivot.top_level = true
+	light_pivot.top_level = true
+	light_pivot.global_position = global_position
+
 	light_pow = DEF_LIGHT_POW
 
 
 func _process(delta):
+
+	# Mouse management
 	mouse_pos = round(get_global_mouse_position())
 	mouse_dir = global_position.direction_to(get_global_mouse_position())
 
-	var lerp_pow = 0.5
 
+	var light_lerp_pow = 0.5
+
+	# Active light stuff
 	if Input.is_action_pressed("m2") and light_active:
-		$LightPivot.global_position = lerp($LightPivot.global_position, get_global_mouse_position(), lerp_pow)
-		$LightPivot.scale = lerp($LightPivot.scale, float_to_vec(cal_light_scale(DEF_LIGHT_SCALE)), lerp_pow)
+		light_pivot.global_position = lerp($LightPivot.global_position, get_global_mouse_position(), light_lerp_pow)
+		light_pivot.scale = lerp($LightPivot.scale, float_to_vec(cal_light_scale(ACTIVE_LIGHT_SCALE)), light_lerp_pow)
 		light_pow -= delta
 		if light_pow <= 0.0:
 			light_active = false
 	else:
-		$LightPivot.global_position = lerp($LightPivot.global_position, global_position, lerp_pow)
-		$LightPivot.scale = lerp($LightPivot.scale, float_to_vec(cal_light_scale(PLAYER_LIGHT_SCALE)), lerp_pow)
+		light_pivot.global_position = lerp($LightPivot.global_position, global_position, light_lerp_pow)
+		light_pivot.scale = lerp($LightPivot.scale, float_to_vec(cal_light_scale(PLAYER_LIGHT_SCALE)), light_lerp_pow)
 		light_pow += delta * 2.0
 		if light_pow > DEF_LIGHT_POW/2.0:
 			light_active = true
 			if light_pow > DEF_LIGHT_POW:
 				light_pow = DEF_LIGHT_POW
 
-	$LightPivot/PointLight2D.energy = 2.0 * (float(light_pow)/DEF_LIGHT_POW)
+	point_light.energy = 1.0 * (float(light_pow)/DEF_LIGHT_POW)
 
 	shoot_cd -= delta
 
+	# Movement Input
 	p_input.x = Input.get_axis("left", "right")
 	p_input.y = Input.get_axis("up", "down")
 
 	p_input = p_input.normalized()
 
+	# Shoot
 	if Input.is_action_pressed("m1") and reload_cd <= 0.0:
 		shoot()
 		if ammo <= 0:
 			reload_cd = RELOAD_T
 	
+	if reload_cd > 0.0:
+		reload_cd -= delta
+		if reload_cd <= 0.0:
+			ammo = 30
+	
+	# On hit
 	if $Hitbox.get_overlapping_bodies().size() > 0 and invin <= 0.0:
 		hp -= 30
 		invin = 3.0
@@ -83,20 +109,17 @@ func _process(delta):
 	else:
 		modulate.a = 1
 	
-	if reload_cd > 0.0:
-		reload_cd -= delta
-		if reload_cd <= 0.0:
-			ammo = 30
-	
 
 
 func _physics_process(delta):
-	velocity = p_input * SPD
+	velocity = ( p_input * SPD ) + added_velo
 
-	print(hp)
+	added_velo = lerp(added_velo, Vector2.ZERO, 0.1)
+
 	move_and_slide()
 
 
+# Call on shoot pressed (Auto considered cd)
 func shoot():
 	if shoot_cd > 0.0:
 		return
@@ -109,6 +132,9 @@ func shoot():
 
 	shoot_cd = DEF_SHOOT_CD
 	ammo -= 1
+
+	var cam = get_node_or_null("%Camera2D")
+	if cam: cam.shake(0.2, 5)
 
 func cal_light_scale(target_rad):
 	var p = 1.0/LIGHT_RES

@@ -1,12 +1,13 @@
 extends Area2D
 
 
-const SPD = 600
+const SPD = 900
 var dir = Vector2.ZERO
 var damage = 50
 
 
 func _ready() -> void:
+	rotation = dir.angle()
 	connect("body_entered", hit)
 
 func _process(delta):

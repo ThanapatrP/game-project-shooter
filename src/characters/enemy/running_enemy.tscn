@@ -1,44 +1,46 @@
-[gd_scene load_steps=5 format=3 uid="uid://dolcvif2pycvo"]
+[gd_scene load_steps=7 format=3 uid="uid://dolcvif2pycvo"]
 
 [ext_resource type="Script" uid="uid://dut2aikrhno42" path="res://src/characters/enemy/running_enemy.gd" id="1_1utja"]
+[ext_resource type="Texture2D" uid="uid://elun683rxg71" path="res://asset/enemy/enemy_spr_v1.png" id="2_nwbxo"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nwbxo"]
+light_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1utja"]
+light_mode = 1
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_du4ue"]
 light_mode = 1
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1utja"]
-radius = 5.0
-height = 10.0
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1utja"]
-light_mode = 1
+radius = 12.0
+height = 24.0
 
 [node name="RunningEnemy" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_1utja")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 5.0
-offset_bottom = 5.0
-color = Color(0.696554, 0.339571, 0.245626, 1)
+[node name="EnemySprite" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_nwbxo")
+scale = Vector2(0.5625, 0.5625)
+texture = ExtResource("2_nwbxo")
+
+[node name="PositionMarker" type="Polygon2D" parent="."]
+material = SubResource("CanvasItemMaterial_1utja")
+scale = Vector2(0.05625, 0.05625)
+color = Color(0.82493, 0, 0.183449, 1)
+polygon = PackedVector2Array(-160, -160, -128, -128, -128, 128, 128, 128, 128, -128, -128, -128, -160, -160, 160, -160, 160, 160, -160, 160)
 
 [node name="FlashingSpr" type="ColorRect" parent="."]
 visible = false
 z_index = 1
 material = SubResource("CanvasItemMaterial_du4ue")
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 5.0
-offset_bottom = 5.0
+offset_left = -9.0
+offset_top = -9.0
+offset_right = 9.0
+offset_bottom = 9.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_1utja")
-
-[node name="PositionMarker" type="Polygon2D" parent="."]
-material = SubResource("CanvasItemMaterial_1utja")
-scale = Vector2(0.03125, 0.03125)
-color = Color(0.698039, 0.341176, 0.247059, 1)
-polygon = PackedVector2Array(-160, -160, -128, -128, -128, 128, 128, 128, 128, -128, -128, -128, -160, -160, 160, -160, 160, 160, -160, 160)
