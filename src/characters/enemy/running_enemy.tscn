@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dolcvif2pycvo"]
+[gd_scene load_steps=9 format=3 uid="uid://dolcvif2pycvo"]
 
 [ext_resource type="Script" uid="uid://dut2aikrhno42" path="res://src/characters/enemy/running_enemy.gd" id="1_1utja"]
-[ext_resource type="Texture2D" uid="uid://elun683rxg71" path="res://asset/enemy/enemy_spr_v1.png" id="2_nwbxo"]
+[ext_resource type="Texture2D" uid="uid://uchgp611vvku" path="res://asset/enemy/enemy_spr_v2.png" id="2_nwbxo"]
+[ext_resource type="Shader" uid="uid://b3hrens8eqmo" path="res://src/shader/color_mod.gdshader" id="3_ttcbt"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nwbxo"]
 light_mode = 2
@@ -12,9 +13,13 @@ light_mode = 1
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_du4ue"]
 light_mode = 1
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gljmp"]
+shader = ExtResource("3_ttcbt")
+shader_parameter/new_color = Color(1, 1, 1, 1)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1utja"]
-radius = 12.0
-height = 24.0
+radius = 17.0
+height = 34.0
 
 [node name="RunningEnemy" type="CharacterBody2D"]
 collision_layer = 4
@@ -23,16 +28,20 @@ script = ExtResource("1_1utja")
 
 [node name="EnemySprite" type="Sprite2D" parent="."]
 material = SubResource("CanvasItemMaterial_nwbxo")
-scale = Vector2(0.5625, 0.5625)
 texture = ExtResource("2_nwbxo")
 
-[node name="PositionMarker" type="Polygon2D" parent="."]
+[node name="PositionMarker" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_nwbxo")
+texture = ExtResource("2_nwbxo")
+
+[node name="PositionMarkerBak" type="Polygon2D" parent="."]
+visible = false
 material = SubResource("CanvasItemMaterial_1utja")
 scale = Vector2(0.05625, 0.05625)
 color = Color(0.82493, 0, 0.183449, 1)
 polygon = PackedVector2Array(-160, -160, -128, -128, -128, 128, 128, 128, 128, -128, -128, -128, -160, -160, 160, -160, 160, 160, -160, 160)
 
-[node name="FlashingSpr" type="ColorRect" parent="."]
+[node name="FlashingSprBak" type="ColorRect" parent="."]
 visible = false
 z_index = 1
 material = SubResource("CanvasItemMaterial_du4ue")
@@ -40,6 +49,11 @@ offset_left = -9.0
 offset_top = -9.0
 offset_right = 9.0
 offset_bottom = 9.0
+
+[node name="FlashingSpr" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_gljmp")
+texture = ExtResource("2_nwbxo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708

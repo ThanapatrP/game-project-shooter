@@ -3,7 +3,7 @@ extends Area2D
 
 const SPD = 900
 var dir = Vector2.ZERO
-var damage = 50
+var damage = 30
 
 
 func _ready() -> void:

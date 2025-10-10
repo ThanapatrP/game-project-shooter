@@ -24,7 +24,7 @@ const DEF_SHOOT_CD = 0.1
 var shoot_cd = 0.0
 var RELOAD_T = 0.8 # default / max reload cooldown
 var reload_cd = -1.0 # currect cooldown of reload
-var ammo = 40
+var ammo = 30
 
 
 # Light stuff
@@ -39,10 +39,16 @@ var light_active = true
 # Resources
 var bullet_res = preload("res://src/object/bullets/bullet.tscn")
 
+var sfx_open_clip = preload("res://asset/sfx/open_clip_sfx.mp3")
+var sfx_reload_complete = preload("res://asset/sfx/reload_complete.mp3")
+
 
 # Node ref
 @onready var light_pivot := $LightPivot
 @onready var point_light := $LightPivot/PointLight2D
+@onready var gun_audio_stream : AudioStreamPlayer = $GunAudioStream
+@onready var reload_audio_player : AudioStreamPlayer = $ReloadAudioStream
+@onready var reload_loop_audio_player : AudioStreamPlayer = $ReloadingAudioStream
 
 
 func _ready():
@@ -92,11 +98,20 @@ func _process(delta):
 		shoot()
 		if ammo <= 0:
 			reload_cd = RELOAD_T
+			reload_audio_player.stop()
+			reload_audio_player.stream = sfx_open_clip
+			reload_audio_player.play()
 	
 	if reload_cd > 0.0:
 		reload_cd -= delta
 		if reload_cd <= 0.0:
 			ammo = 30
+			reload_audio_player.stop()
+			reload_audio_player.stream = sfx_reload_complete
+			reload_audio_player.play()
+
+	if reload_loop_audio_player.playing != (reload_cd > 0.0):
+		reload_loop_audio_player.playing = (reload_cd > 0.0)
 	
 	# On hit
 	if $Hitbox.get_overlapping_bodies().size() > 0 and invin <= 0.0:
@@ -135,6 +150,8 @@ func shoot():
 
 	var cam = get_node_or_null("%Camera2D")
 	if cam: cam.shake(0.2, 5)
+
+	gun_audio_stream.play()
 
 func cal_light_scale(target_rad):
 	var p = 1.0/LIGHT_RES
