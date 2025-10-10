@@ -25,13 +25,14 @@ var shoot_cd = 0.0
 var RELOAD_T = 0.8 # default / max reload cooldown
 var reload_cd = -1.0 # currect cooldown of reload
 var ammo = 30
+var MAX_AMMO = 30
 
 
 # Light stuff
 const DEF_LIGHT_POW = 3.5 # how long light will last in second (max)
 const LIGHT_RES := 256 # size of light texture
 const ACTIVE_LIGHT_SCALE = 128 + 32
-const PLAYER_LIGHT_SCALE = 64+16
+const PLAYER_LIGHT_SCALE = 128 - 32
 var light_pow = 0.0
 var light_active = true
 
@@ -56,6 +57,8 @@ func _ready():
 	light_pivot.global_position = global_position
 
 	light_pow = DEF_LIGHT_POW
+
+	ammo = MAX_AMMO
 
 
 func _process(delta):
@@ -97,6 +100,9 @@ func _process(delta):
 	if Input.is_action_pressed("m1") and reload_cd <= 0.0:
 		shoot()
 		if ammo <= 0:
+			if Global.cursor:
+				Global.cursor.set_cursor_sprite(Global.cursor.Cursor.RELOADING)
+				Global.cursor.set_cursor_transform(Vector2(2.1, 2.1), -30)
 			reload_cd = RELOAD_T
 			reload_audio_player.stop()
 			reload_audio_player.stream = sfx_open_clip
@@ -104,11 +110,23 @@ func _process(delta):
 	
 	if reload_cd > 0.0:
 		reload_cd -= delta
+		if Global.cursor:
+			Global.cursor.set_progress(reload_cd / RELOAD_T)
+			Global.cursor.set_cursor_text("[wave amp=50.0 freq=10.0 connected=0]RELOADING")
 		if reload_cd <= 0.0:
+			if Global.cursor:
+				Global.cursor.set_cursor_sprite(Global.cursor.Cursor.CROSSHAIR)
+				Global.cursor.set_cursor_transform(Vector2(2.1, 2.1), -30)
 			ammo = 30
 			reload_audio_player.stop()
 			reload_audio_player.stream = sfx_reload_complete
 			reload_audio_player.play()
+	else:
+		if Global.cursor:
+			if ammo < MAX_AMMO * 0.3:
+				Global.cursor.set_cursor_text("[color=ORANGE]%d[/color]/%d" % [ammo, MAX_AMMO])
+			else:
+				Global.cursor.set_cursor_text("%d/%d" % [ammo, MAX_AMMO])
 
 	if reload_loop_audio_player.playing != (reload_cd > 0.0):
 		reload_loop_audio_player.playing = (reload_cd > 0.0)
@@ -152,6 +170,8 @@ func shoot():
 	if cam: cam.shake(0.2, 5)
 
 	gun_audio_stream.play()
+
+	if Global.cursor: Global.cursor.set_cursor_transform(Vector2(2, 2), randf_range(-30, 30))
 
 func cal_light_scale(target_rad):
 	var p = 1.0/LIGHT_RES

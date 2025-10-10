@@ -28,31 +28,33 @@ script = ExtResource("1_ohibe")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("CanvasItemMaterial_ohibe")
-offset_left = -9.0
+offset_left = -1.0
 offset_top = -3.0
-offset_right = 9.0
+offset_right = 17.0
 offset_bottom = 3.0
 color = Color(1, 0.709804, 0, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 material = SubResource("CanvasItemMaterial_ohibe")
-offset_left = -4.0
+offset_left = 4.0
 offset_top = -3.0
-offset_right = 8.0
+offset_right = 16.0
 offset_bottom = 3.0
 color = Color(1, 0.95, 0, 1)
 
 [node name="ColorRect3" type="ColorRect" parent="."]
 material = SubResource("CanvasItemMaterial_ohibe")
-offset_left = -1.0
+offset_left = 7.0
 offset_top = -2.0
-offset_right = 7.0
+offset_right = 15.0
 offset_bottom = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 0)
 shape = SubResource("RectangleShape2D_bq0wm")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(8, 0)
 scale = Vector2(1.4375, 0.75)
 blend_mode = 2
 texture = SubResource("GradientTexture2D_ohibe")

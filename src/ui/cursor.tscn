@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://whcd4uekaxv6"]
+
+[ext_resource type="Texture2D" uid="uid://df6ghieaqih2g" path="res://asset/ui/cursor/crosshair_cursor.png" id="1_5mq0m"]
+[ext_resource type="Script" uid="uid://dlkgqwlkk46ee" path="res://src/ui/cursor.gd" id="1_ac65b"]
+[ext_resource type="FontFile" uid="uid://7ip1rh1cottq" path="res://asset/ui/Smol font.ttf" id="3_y5l1o"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ac65b"]
+light_mode = 1
+
+[node name="Cursor" type="Node2D"]
+script = ExtResource("1_ac65b")
+
+[node name="CursorSpr" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_ac65b")
+position = Vector2(0.5, 0.5)
+texture = ExtResource("1_5mq0m")
+
+[node name="CursorLabel" type="RichTextLabel" parent="."]
+clip_contents = false
+offset_left = 10.0
+offset_top = 7.0
+offset_right = 161.0
+offset_bottom = 91.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("3_y5l1o")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "TEST"

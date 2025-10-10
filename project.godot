@@ -11,17 +11,21 @@ config_version=5
 [application]
 
 config/name="Project Shooter"
-run/main_scene="uid://bcnmonal0ebkm"
+run/main_scene="uid://co30y8baliqso"
 config/features=PackedStringArray("4.4", "Forward Plus")
 run/max_fps=60
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://src/util/global.gd"
 
 [display]
 
 window/size/viewport_width=550
 window/size/viewport_height=390
-window/size/window_width_override=1280
-window/size/window_height_override=960
+window/size/window_width_override=1100
+window/size/window_height_override=780
 window/stretch/mode="viewport"
 
 [input]
