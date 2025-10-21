@@ -7,9 +7,10 @@ var flashing_t = -1.0
 
 var follow = null
 
+func _ready() -> void:
+	$PositionMarker.self_modulate.a = 1.0
 
 func _process(delta):
-
 	if($PositionMarker.self_modulate.a > 0):
 		$PositionMarker.self_modulate.a = lerp($PositionMarker.self_modulate.a, 0.0, 0.1)
 
@@ -43,5 +44,7 @@ func hurt(kb_dir, damage):
 
 	spd *= 1.1
 
-	if hp <= 0.0:
+	if hp <= 0.0: # DEAD
+		FxSpawner.spawn_float_text("[shake rate=40.0 level=20 connected=0]DEAD!", global_position + Vector2(0, -32), Color.RED, 1)
+		FxSpawner.spawn_float_text("+100", global_position + Vector2(0, -16), Color.WHITE, 2)
 		queue_free()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://co30y8baliqso"]
+[gd_scene load_steps=10 format=3 uid="uid://co30y8baliqso"]
 
 [ext_resource type="PackedScene" uid="uid://c2uvr2f2eld2n" path="res://src/characters/player/player.tscn" id="1_b6xw5"]
 [ext_resource type="Script" uid="uid://dlkm2ubumia7v" path="res://src/levels/spawner.gd" id="2_ctyfj"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://0rf7u1t2yp73" path="res://src/util/custom_camera.gd" id="5_ctyfj"]
 [ext_resource type="PackedScene" uid="uid://whcd4uekaxv6" path="res://src/ui/cursor.tscn" id="6_11df1"]
 [ext_resource type="FontFile" uid="uid://7ip1rh1cottq" path="res://asset/ui/Smol font.ttf" id="6_k0jp4"]
+[ext_resource type="Texture2D" uid="uid://dm8gi5bulobax" path="res://asset/level/temp_level_bg.png" id="8_1du40"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ctyfj"]
 font = ExtResource("6_k0jp4")
@@ -28,12 +29,18 @@ offset_right = 658.0
 offset_bottom = 478.0
 color = Color(0.221902, 0.221902, 0.221902, 1)
 
+[node name="TempLevelBg" type="Sprite2D" parent="."]
+z_index = -99
+position = Vector2(274.5, 196.75)
+scale = Vector2(2.16016, 1.54706)
+texture = ExtResource("8_1du40")
+
 [node name="Player" parent="." instance=ExtResource("1_b6xw5")]
 unique_name_in_owner = true
 position = Vector2(240, 249)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0, 0, 0, 1)
+color = Color(0.15967, 0.15967, 0.15967, 1)
 
 [node name="Spawner" type="Node" parent="."]
 script = ExtResource("2_ctyfj")

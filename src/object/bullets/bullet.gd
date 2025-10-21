@@ -19,5 +19,8 @@ func _physics_process(delta):
 
 func hit(body):
 	if body is CharacterBody2D:
+
+		global_position = body.global_position
+
 		body.hurt(dir, damage)
 		queue_free()

@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6klhn0q02dox"]
+
+[ext_resource type="FontFile" uid="uid://7ip1rh1cottq" path="res://asset/ui/Smol font.ttf" id="1_cl2qc"]
+[ext_resource type="Script" uid="uid://dhu60eygxn7ew" path="res://src/fx/float_text/float_text.gd" id="1_x2n2a"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_x2n2a"]
+light_mode = 1
+
+[node name="FloatText" type="Node2D"]
+z_index = 80
+script = ExtResource("1_x2n2a")
+
+[node name="Label" type="RichTextLabel" parent="."]
+material = SubResource("CanvasItemMaterial_x2n2a")
+clip_contents = false
+offset_left = -140.0
+offset_top = -22.0
+offset_right = 142.0
+offset_bottom = 1.0
+theme_override_constants/outline_size = 4
+theme_override_fonts/normal_font = ExtResource("1_cl2qc")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "TEST"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 2

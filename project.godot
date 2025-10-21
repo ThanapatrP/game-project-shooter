@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://src/util/global.gd"
+FxSpawner="*res://src/util/fx_spawner.gd"
 
 [display]
 

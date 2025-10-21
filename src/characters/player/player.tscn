@@ -22,7 +22,7 @@ height = 16.0
 
 [sub_resource type="Gradient" id="Gradient_bxhu7"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0.272727, 0.402597, 0.549784, 0.688312)
+offsets = PackedFloat32Array(0.41048, 0.558952, 0.641921, 0.694323)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.654902, 1, 1, 1, 0.345098, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_5c1al"]

@@ -6,10 +6,9 @@
 [ext_resource type="Shader" uid="uid://b3hrens8eqmo" path="res://src/shader/color_mod.gdshader" id="3_ttcbt"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ttcbt"]
-blend_mode = 1
 light_mode = 1
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nwbxo"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gljmp"]
 light_mode = 2
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1utja"]
@@ -32,11 +31,12 @@ collision_mask = 0
 script = ExtResource("1_1utja")
 
 [node name="PositionMarker" type="Sprite2D" parent="."]
+z_index = 1
 material = SubResource("CanvasItemMaterial_ttcbt")
 texture = ExtResource("3_gljmp")
 
 [node name="EnemySprite" type="Sprite2D" parent="."]
-material = SubResource("CanvasItemMaterial_nwbxo")
+material = SubResource("CanvasItemMaterial_gljmp")
 texture = ExtResource("2_nwbxo")
 
 [node name="PositionMarkerBak" type="Polygon2D" parent="."]
@@ -57,6 +57,7 @@ offset_bottom = 9.0
 
 [node name="FlashingSpr" type="Sprite2D" parent="."]
 visible = false
+z_index = 2
 material = SubResource("ShaderMaterial_gljmp")
 texture = ExtResource("2_nwbxo")
 
