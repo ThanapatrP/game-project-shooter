@@ -133,6 +133,11 @@ func _process(delta):
 	
 	# On hit
 	if $Hitbox.get_overlapping_bodies().size() > 0 and invin <= 0.0:
+		if Global.hurt_overlay:
+			Global.hurt_overlay.start()
+
+		if Global.camera: Global.camera.shake(0.5, 15)
+
 		hp -= 30
 		invin = 3.0
 
@@ -166,8 +171,7 @@ func shoot():
 	shoot_cd = DEF_SHOOT_CD
 	ammo -= 1
 
-	var cam = get_node_or_null("%Camera2D")
-	if cam: cam.shake(0.2, 5)
+	if Global.camera: Global.camera.shake(0.2, 5)
 
 	gun_audio_stream.play()
 

@@ -1,13 +1,9 @@
-extends CharacterBody2D
+extends Enemy
 
-
-var spd = 40
-var hp = 100
 var flashing_t = -1.0
 
-var follow = null
-
 func _ready() -> void:
+	kb_mult = 2.5
 	$PositionMarker.self_modulate.a = 1.0
 
 func _process(delta):
@@ -28,23 +24,14 @@ func _process(delta):
 
 func _physics_process(delta):
 	if follow != null:
-		velocity = lerp(velocity, global_position.direction_to(follow.global_position) * spd, 0.1)
+		apply_vel(follow.global_position)
 	else:
 		velocity = Vector2.ZERO
 	
 	move_and_slide()
 
-
-func hurt(kb_dir, damage):
-	velocity = kb_dir * spd * 3
-
-	hp -= damage
-
+func hurt(kb_dir : Vector2, damage : float, auto_free : bool = true):
 	flashing_t = 0.04
-
-	spd *= 1.1
-
-	if hp <= 0.0: # DEAD
-		FxSpawner.spawn_float_text("[shake rate=40.0 level=20 connected=0]DEAD!", global_position + Vector2(0, -32), Color.RED, 1)
-		FxSpawner.spawn_float_text("+100", global_position + Vector2(0, -16), Color.WHITE, 2)
-		queue_free()
+	spd *= 1.4 # faster if took damage
+	kb_mult *= 0.7
+	super(kb_dir, damage)

@@ -6,6 +6,10 @@ var _curr_shake_t : float = 0.0
 var shake_intensity : float = 0.0
 
 
+func _enter_tree() -> void:
+    Global.camera = self
+
+
 func _ready() -> void:
     pass
 
@@ -33,3 +37,7 @@ func shake(duration : float, intensity : float):
     _curr_shake_t = shake_t
 
     shake_intensity = intensity
+
+
+func _exit_tree() -> void:
+    Global.camera = null

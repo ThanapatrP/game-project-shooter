@@ -13,13 +13,13 @@ config_version=5
 config/name="Project Shooter"
 run/main_scene="uid://co30y8baliqso"
 config/features=PackedStringArray("4.4", "Forward Plus")
-run/max_fps=60
 config/icon="res://icon.svg"
 
 [autoload]
 
 Global="*res://src/util/global.gd"
 FxSpawner="*res://src/util/fx_spawner.gd"
+EventCenter="*res://src/util/event_center.gd"
 
 [display]
 

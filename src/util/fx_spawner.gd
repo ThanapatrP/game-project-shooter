@@ -12,3 +12,4 @@ func spawn_float_text(text : String, glob_pos : Vector2, color : Color = Color.W
 	new_float_text.font_size = text_scale * 8
 
 	get_tree().current_scene.add_child(new_float_text)
+

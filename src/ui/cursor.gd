@@ -37,11 +37,16 @@ func _process(delta: float) -> void:
 	queue_redraw()
 	cursor_sprite.texture = _cursor_texture[active_cursor_sprite]
 
-	global_position = round(get_global_mouse_position())
+	# global_position = round(get_global_mouse_position())
 
 func _physics_process(delta):
 	cursor_sprite.scale = lerp(cursor_sprite.scale, Vector2(1, 1), 0.1)
 	cursor_sprite.rotation_degrees = lerp(cursor_sprite.rotation_degrees, 0.0, 0.1)
+
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		global_position = round(event.global_position)
 
 
 func set_cursor_sprite(cursor_spr : Cursor):

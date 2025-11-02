@@ -18,9 +18,11 @@ func _physics_process(delta):
 
 
 func hit(body):
-	if body is CharacterBody2D:
 
-		global_position = body.global_position
+	var b = get_overlapping_bodies()[0]
 
-		body.hurt(dir, damage)
-		queue_free()
+	global_position = b.global_position
+
+	b.hurt(dir, damage)
+
+	queue_free()
