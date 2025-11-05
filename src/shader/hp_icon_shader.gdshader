@@ -11,9 +11,9 @@ void fragment() {
 	float prog = 1.0 - progress;
 	float fol_prog = 1.0 - follow_progress;
 	vec4 col = texture(TEXTURE, UV);
-	
+
 	float val = (col.r + col.g + col.b)/3.0;
-	
+
 	if (UV.y > prog){
 		COLOR = vec4(primary_color.r * val,primary_color.g * val, primary_color.b * val, col.a);
 	}else{
