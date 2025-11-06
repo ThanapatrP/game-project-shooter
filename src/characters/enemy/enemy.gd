@@ -11,6 +11,9 @@ var dead_point = 100
 var kb_mult = 3
 var apply_knockback = true
 
+func _ready() -> void:
+    PauseParasite.create(self)
+
 func apply_vel(to_glob_pos : Vector2):
     velocity = lerp(velocity, global_position.direction_to(to_glob_pos) * spd, 0.1)
 

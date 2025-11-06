@@ -17,6 +17,7 @@ func _ready() -> void:
 	timer.one_shot = true
 
 	timer.start(randf_range(spawn_cd.get(0), spawn_cd.get(1)))
+	PauseParasite.create(self)
 
 func spawn_rand():
 	randomize()

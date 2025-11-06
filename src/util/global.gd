@@ -11,6 +11,9 @@ var score_label = null
 var curr_score = 0
 var highscore = 0
 
+# Signals
+signal pause
+signal resume
 
 func add_score(amt):
     if amt < 0:
@@ -24,3 +27,7 @@ func add_score(amt):
 func load_data():
     pass
 
+
+func _input(event: InputEvent) -> void:
+    if Input.is_action_just_pressed("ui_accept"):
+        emit_signal("pause")

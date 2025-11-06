@@ -60,6 +60,8 @@ func _ready():
 
 	ammo = MAX_AMMO
 
+	PauseParasite.create(self)
+
 
 func _process(delta):
 
