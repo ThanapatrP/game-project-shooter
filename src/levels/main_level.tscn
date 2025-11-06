@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://cpfugg5pyr134" path="res://src/ui/score_label.gd" id="8_ywe2d"]
 [ext_resource type="Texture2D" uid="uid://bdfs3bbusy52" path="res://asset/ui/ui_overlays/cat_hurts_overlay.png" id="9_tygi3"]
 [ext_resource type="Script" uid="uid://benpvdb4y2nyl" path="res://src/ui/hurt_overlay.gd" id="10_twkqo"]
-[ext_resource type="PackedScene" path="res://src/ui/hp_indicator.tscn" id="12_av45r"]
+[ext_resource type="PackedScene" uid="uid://cwsp1ptrx6men" path="res://src/ui/hp_indicator.tscn" id="12_av45r"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tygi3"]
 light_mode = 1
