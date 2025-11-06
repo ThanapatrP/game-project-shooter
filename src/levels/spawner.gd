@@ -3,29 +3,28 @@ extends Node
 var spawn_cd = [1.5,3]
 var spawn_count = [2,5]
 
-var enemy_scene = preload("res://src/characters/enemy/running_enemy.tscn")
+var curr_spawn_t = 0.0
 
-var timer : Timer = null
+var enemy_scene = preload("res://src/characters/enemy/running_enemy.tscn")
 
 func _ready() -> void:
 	randomize()
-
-	timer = Timer.new()
-	add_child(timer)
-	timer.connect("timeout", spawn_rand)
-	timer.autostart = false
-	timer.one_shot = true
-
-	timer.start(randf_range(spawn_cd.get(0), spawn_cd.get(1)))
 	PauseParasite.create(self)
+
+	curr_spawn_t = randf_range(spawn_cd.get(0), spawn_count.get(1))
+
+func _physics_process(delta: float) -> void:
+	curr_spawn_t -= delta
+
+	if curr_spawn_t < 0.0:
+		spawn_rand()
+		curr_spawn_t = randf_range(spawn_cd[0], spawn_cd[1])
 
 func spawn_rand():
 	randomize()
 	var new_range = randf_range(spawn_count.get(0), spawn_count.get(1))
 	for i in range(0, new_range):
 		spawn()
-
-	timer.start(randf_range(spawn_cd.get(0), spawn_cd.get(1)))
 
 
 func spawn():

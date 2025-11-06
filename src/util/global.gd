@@ -27,8 +27,3 @@ func add_score(amt):
 # save load stuff
 func load_data():
     pass
-
-
-func _input(event: InputEvent) -> void:
-    if Input.is_action_just_pressed("ui_accept"):
-        emit_signal("pause")

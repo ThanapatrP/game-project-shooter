@@ -42,6 +42,21 @@ func _process(delta: float) -> void:
 	idle_icon.material.set_shader_parameter("follow_progress", curr_progress)
 	hurt_icon.material.set_shader_parameter("follow_progress", curr_progress)
 
+	var threshold = 0.6
+	if curr_progress > threshold:
+		col = green
+	else:
+		col = red.lerp(green, curr_progress / threshold)
+	
+	idle_icon.material.set_shader_parameter("primary_color", col)
+	hurt_icon.material.set_shader_parameter("primary_color", col)
+
+	var dimmed_col : Color = col
+	dimmed_col.v *= 0.7
+
+	idle_icon.material.set_shader_parameter("secondary_color", dimmed_col)
+	hurt_icon.material.set_shader_parameter("secondary_color", dimmed_col)
+
 	# Sprite switching
 	if spr_t > 0.0:
 		idle_icon.visible = false
@@ -50,9 +65,9 @@ func _process(delta: float) -> void:
 		idle_icon.visible = true
 		hurt_icon.visible = false
 
+
 func _physics_process(delta: float) -> void:
 	curr_progress = lerp(curr_progress, to_progress, 0.07)
-	print(to_progress)
 
 
 func shake():
@@ -64,22 +79,6 @@ func set_progress(new_progress : float):
 	if new_progress > curr_progress:
 		curr_progress = new_progress
 	to_progress = new_progress
-
-	var threshold = 0.6
-	if to_progress > threshold:
-		col = green
-	else:
-		col = red.lerp(green, to_progress / threshold)
-	
-	idle_icon.material.set_shader_parameter("primary_color", col)
-	hurt_icon.material.set_shader_parameter("primary_color", col)
-
-	var dimmed_col : Color = col
-	dimmed_col.v *= 0.7
-
-	idle_icon.material.set_shader_parameter("secondary_color", dimmed_col)
-	hurt_icon.material.set_shader_parameter("secondary_color", dimmed_col)
-
 
 
 func _exit_tree() -> void:
