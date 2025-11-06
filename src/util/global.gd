@@ -6,6 +6,7 @@ var camera : Camera2D = null
 var cursor = null
 var hurt_overlay = null
 var score_label = null
+var hp_indicator = null
 
 # Save stuff
 var curr_score = 0

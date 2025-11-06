@@ -15,7 +15,8 @@ var mouse_dir : Vector2 = Vector2.ZERO
 
 
 # HP stuff
-var hp = 100
+const MAX_HP = 100.0
+var hp = 100.0
 var invin = -1.0
 
 
@@ -138,10 +139,14 @@ func _process(delta):
 		if Global.hurt_overlay:
 			Global.hurt_overlay.start()
 
-		if Global.camera: Global.camera.shake(0.5, 15)
+		if Global.camera:
+			Global.camera.shake(0.5, 15)
+			Global.hp_indicator.shake()
 
 		hp -= 30
 		invin = 3.0
+
+		Global.hp_indicator.set_progress(hp / MAX_HP)
 
 	if invin > 0.0:
 		modulate.a = abs(cos(Time.get_ticks_msec()/100.0))
