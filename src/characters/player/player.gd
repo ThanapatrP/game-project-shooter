@@ -15,27 +15,29 @@ var mouse_dir : Vector2 = Vector2.ZERO
 
 
 # HP stuff
-const MAX_HP = 100.0
+var MAX_HP = 100.0
 var hp = 100.0
 var invin = -1.0
 
 
 # Shoot stuff
-const DEF_SHOOT_CD = 0.1
+var DEF_SHOOT_CD = 0.1
 var shoot_cd = 0.0
 var RELOAD_T = 0.8 # default / max reload cooldown
 var reload_cd = -1.0 # currect cooldown of reload
 var ammo = 30
 var MAX_AMMO = 30
 
+var bullet_dmg_mult : float = 1.0
+
 
 # Light stuff
-const DEF_LIGHT_POW = 3.5 # how long light will last in second (max)
-const LIGHT_RES := 256 # size of light texture
-const ACTIVE_LIGHT_SCALE = 128 + 32
-const PLAYER_LIGHT_SCALE = 128 - 32
+var DEF_LIGHT_POW = 3.5 # how long light will last in second (max)
+const LIGHT_RES := 256 # size of light texture (NO CHANGE DURING GAMEPLAY!!)
+var ACTIVE_LIGHT_SCALE = 128 + 32
+var PLAYER_LIGHT_SCALE = 128 - 32
 var light_pow = 0.0
-var light_active = true
+var light_active = true # if true - player still can use m2 to use light
 
 
 # Resources
@@ -52,6 +54,13 @@ var sfx_reload_complete = preload("res://asset/sfx/reload_complete.mp3")
 @onready var reload_audio_player : AudioStreamPlayer = $ReloadAudioStream
 @onready var reload_loop_audio_player : AudioStreamPlayer = $ReloadingAudioStream
 
+func _enter_tree() -> void:
+	Global.player = self
+
+
+func _exit_tree() -> void:
+	Global.player = null
+
 
 func _ready():
 	light_pivot.top_level = true
@@ -60,8 +69,6 @@ func _ready():
 	light_pow = DEF_LIGHT_POW
 
 	ammo = MAX_AMMO
-
-	PauseParasite.create(self)
 
 
 func _process(delta):
@@ -173,6 +180,8 @@ func shoot():
 	bullet.global_position = global_position
 	bullet.dir = mouse_dir
 
+	bullet.damage *= bullet_dmg_mult # apply damage mult
+
 	get_tree().current_scene.add_child(bullet)
 
 	shoot_cd = DEF_SHOOT_CD
@@ -191,3 +200,7 @@ func cal_light_scale(target_rad):
 
 func float_to_vec(n):
 	return Vector2(n, n)
+
+func apply_cursor():
+	if Global.cursor != null:
+		pass

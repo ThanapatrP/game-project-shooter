@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0gdnghceog14"]
+
+[ext_resource type="PackedScene" uid="uid://cbhb18adwsxe1" path="res://src/object/card/curse_card.tscn" id="1_mhh4k"]
+[ext_resource type="Script" uid="uid://blhqqgmpo52jx" path="res://src/ui/card_layer.gd" id="1_x8ghf"]
+
+[node name="CardLayer" type="CanvasLayer"]
+process_mode = 3
+layer = 2
+script = ExtResource("1_x8ghf")
+
+[node name="CurseCard1" parent="." instance=ExtResource("1_mhh4k")]
+position = Vector2(135, 160)
+
+[node name="CurseCard2" parent="." instance=ExtResource("1_mhh4k")]
+position = Vector2(240, 160)
+
+[node name="CurseCard3" parent="." instance=ExtResource("1_mhh4k")]
+position = Vector2(353, 160)

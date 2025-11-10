@@ -5,7 +5,6 @@ var flashing_t = -1.0
 func _ready() -> void:
 	kb_mult = 2.5
 	$PositionMarker.self_modulate.a = 1.0
-	PauseParasite.create(self)
 
 func _process(delta):
 	if($PositionMarker.self_modulate.a > 0):

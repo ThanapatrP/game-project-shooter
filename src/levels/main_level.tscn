@@ -1,9 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://co30y8baliqso"]
+[gd_scene load_steps=14 format=3 uid="uid://co30y8baliqso"]
 
 [ext_resource type="PackedScene" uid="uid://c2uvr2f2eld2n" path="res://src/characters/player/player.tscn" id="1_b6xw5"]
 [ext_resource type="Script" uid="uid://dlkm2ubumia7v" path="res://src/levels/spawner.gd" id="2_ctyfj"]
 [ext_resource type="Script" uid="uid://djtoury4cj4ex" path="res://src/levels/hp_bar_pivot.gd" id="3_11df1"]
-[ext_resource type="Script" uid="uid://c65tq4spr5dxh" path="res://src/levels/ammo_label.gd" id="4_k0jp4"]
 [ext_resource type="Script" uid="uid://0rf7u1t2yp73" path="res://src/util/custom_camera.gd" id="5_ctyfj"]
 [ext_resource type="PackedScene" uid="uid://whcd4uekaxv6" path="res://src/ui/cursor.tscn" id="6_11df1"]
 [ext_resource type="FontFile" uid="uid://7ip1rh1cottq" path="res://asset/ui/Smol font.ttf" id="6_k0jp4"]
@@ -11,16 +10,11 @@
 [ext_resource type="Script" uid="uid://cpfugg5pyr134" path="res://src/ui/score_label.gd" id="8_ywe2d"]
 [ext_resource type="Texture2D" uid="uid://bdfs3bbusy52" path="res://asset/ui/ui_overlays/cat_hurts_overlay.png" id="9_tygi3"]
 [ext_resource type="Script" uid="uid://benpvdb4y2nyl" path="res://src/ui/hurt_overlay.gd" id="10_twkqo"]
+[ext_resource type="PackedScene" uid="uid://d0gdnghceog14" path="res://src/ui/card_layer.tscn" id="11_av45r"]
 [ext_resource type="PackedScene" uid="uid://cwsp1ptrx6men" path="res://src/ui/hp_indicator.tscn" id="12_av45r"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tygi3"]
 light_mode = 1
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ywe2d"]
-blend_mode = 1
-
-[sub_resource type="LabelSettings" id="LabelSettings_av45r"]
-font_size = 100
 
 [node name="Level" type="Node2D"]
 y_sort_enabled = true
@@ -36,6 +30,7 @@ offset_left = -102.0
 offset_top = -78.0
 offset_right = 658.0
 offset_bottom = 478.0
+mouse_filter = 1
 color = Color(0.221902, 0.221902, 0.221902, 1)
 
 [node name="TempLevelBg" type="Sprite2D" parent="."]
@@ -54,35 +49,26 @@ color = Color(0, 0, 0, 1)
 [node name="Spawner" type="Node" parent="."]
 script = ExtResource("2_ctyfj")
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UILayer" type="CanvasLayer" parent="."]
 
-[node name="HpBarPivot" type="Node2D" parent="UI"]
+[node name="HpBarPivot" type="Node2D" parent="UILayer"]
 visible = false
 position = Vector2(11, 364)
 script = ExtResource("3_11df1")
 metadata/_edit_group_ = true
 
-[node name="HpBarDropShadow" type="ColorRect" parent="UI/HpBarPivot"]
+[node name="HpBarDropShadow" type="ColorRect" parent="UILayer/HpBarPivot"]
 offset_top = 1.0
 offset_right = 103.0
 offset_bottom = 17.0
 
-[node name="HpBar" type="ColorRect" parent="UI/HpBarPivot"]
+[node name="HpBar" type="ColorRect" parent="UILayer/HpBarPivot"]
 offset_left = 1.0
 offset_right = 104.0
 offset_bottom = 16.0
 color = Color(0, 0.729565, 0.0597753, 1)
 
-[node name="AmmoLabel" type="Label" parent="UI"]
-visible = false
-offset_left = 498.0
-offset_top = 356.0
-offset_right = 541.0
-offset_bottom = 379.0
-text = "30/30"
-script = ExtResource("4_k0jp4")
-
-[node name="ScoreLabel" type="RichTextLabel" parent="UI"]
+[node name="ScoreLabel" type="RichTextLabel" parent="UILayer"]
 offset_top = 12.0
 offset_right = 550.0
 offset_bottom = 43.0
@@ -98,7 +84,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("8_ywe2d")
 
-[node name="HurtOverlay" type="Sprite2D" parent="UI"]
+[node name="HurtOverlay" type="Sprite2D" parent="UILayer"]
 self_modulate = Color(1, 1, 1, 0.184314)
 material = SubResource("CanvasItemMaterial_tygi3")
 position = Vector2(276.25, 192)
@@ -106,21 +92,13 @@ scale = Vector2(2.44231, 1.89862)
 texture = ExtResource("9_tygi3")
 script = ExtResource("10_twkqo")
 
-[node name="Label" type="Label" parent="UI"]
-visible = false
-material = SubResource("CanvasItemMaterial_ywe2d")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "KILL"
-label_settings = SubResource("LabelSettings_av45r")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HpIndicator" parent="UI" instance=ExtResource("12_av45r")]
+[node name="HpIndicator" parent="UILayer" instance=ExtResource("12_av45r")]
 position = Vector2(11, 319)
 
-[node name="Cursor" parent="UI" instance=ExtResource("6_11df1")]
+[node name="CardLayer" parent="." instance=ExtResource("11_av45r")]
+
+[node name="CursorLayer" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="Cursor" parent="CursorLayer" instance=ExtResource("6_11df1")]
 position = Vector2(240, 179)

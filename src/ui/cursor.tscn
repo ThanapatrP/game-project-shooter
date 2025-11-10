@@ -8,6 +8,7 @@
 light_mode = 1
 
 [node name="Cursor" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_ac65b")
 
 [node name="CursorSpr" type="Sprite2D" parent="."]

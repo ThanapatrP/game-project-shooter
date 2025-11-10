@@ -4,6 +4,7 @@ extends Node2D
 enum Cursor {
 	CROSSHAIR,
 	RELOADING,
+	POINT,
 }
 
 var active_cursor_sprite = Cursor.CROSSHAIR
@@ -11,6 +12,7 @@ var active_cursor_sprite = Cursor.CROSSHAIR
 var _cursor_texture = [
 	preload("res://asset/ui/cursor/crosshair_cursor.png"),
 	preload("res://asset/ui/cursor/reload_cursor.png"),
+	preload("res://asset/ui/cursor/point_cursor.png")
 ]
 
 
