@@ -1,21 +1,148 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbhb18adwsxe1"]
+[gd_scene load_steps=10 format=3 uid="uid://cbhb18adwsxe1"]
 
-[ext_resource type="Texture2D" uid="uid://ccshccosw5ucp" path="res://icon.svg" id="1_rdrce"]
 [ext_resource type="Script" uid="uid://biyud2pe0gxdk" path="res://src/object/card/curse_card.gd" id="1_xs56f"]
+[ext_resource type="Texture2D" uid="uid://ckw40mw1iwe87" path="res://asset/ui/card/card_base_spr.png" id="2_p06a0"]
+[ext_resource type="Texture2D" uid="uid://dp623ycnrwtr5" path="res://asset/ui/card/icons/temp_icon.png" id="3_jgh6w"]
+[ext_resource type="FontFile" uid="uid://7ip1rh1cottq" path="res://asset/ui/Smol font.ttf" id="3_p06a0"]
+
+[sub_resource type="Shader" id="Shader_jgh6w"]
+code = "shader_type canvas_item;
+
+uniform vec4 outline_col : source_color = vec4(1,1,1,1);
+uniform bool outline = true;
+uniform vec4 new_col : source_color = vec4(1,1,1,1);
+uniform bool colorize = false;
+
+uniform vec2 size = vec2(32,32);
+
+void fragment() {
+	vec4 col = texture(TEXTURE, UV);
+	vec2 pix_size = vec2(1.0/size.x, 1.0/size.y);
+	
+	if (colorize){
+		COLOR = vec4(new_col.r, new_col.g, new_col.b, texture(TEXTURE, UV).a);
+	}
+	
+	if (outline){
+		if ((texture(TEXTURE, UV + vec2(pix_size.x, 0.0)).a > 0.0 ||
+			texture(TEXTURE, UV + vec2(-pix_size.x, 0.0)).a > 0.0 ||
+			texture(TEXTURE, UV + vec2(0.0, pix_size.y)).a > 0.0 ||
+			texture(TEXTURE, UV + vec2(0.0, -pix_size.y)).a > 0.0 ||
+			texture(TEXTURE, UV + vec2(pix_size.x, pix_size.y)).a > 0.0 ||
+			texture(TEXTURE, UV + vec2(-pix_size.x, pix_size.y)).a > 0.0 ||
+			texture(TEXTURE, UV + vec2(pix_size.x, -pix_size.y)).a > 0.0 ||
+			texture(TEXTURE, UV + vec2(-pix_size.x, -pix_size.y)).a > 0.0) && col.a == 0.0){
+			COLOR = outline_col;
+		}
+	}
+	
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k41ne"]
+resource_local_to_scene = true
+shader = SubResource("Shader_jgh6w")
+shader_parameter/outline_col = Color(1, 1, 1, 1)
+shader_parameter/outline = true
+shader_parameter/new_col = Color(1, 1, 1, 1)
+shader_parameter/colorize = false
+shader_parameter/size = Vector2(104, 144)
+
+[sub_resource type="Shader" id="Shader_gbdaw"]
+code = "shader_type canvas_item;
+
+uniform vec4 outline_col : source_color = vec4(1,1,1,1);
+uniform bool outline = true;
+uniform vec4 new_col : source_color = vec4(1,1,1,1);
+uniform float colorize : hint_range(0.0, 1.0, 0.1) = 0.0;
+
+uniform vec2 size = vec2(32,32);
+
+void fragment() {
+	vec4 col = texture(TEXTURE, UV);
+	vec2 pix_size = vec2(1.0/size.x, 1.0/size.y);
+	
+	COLOR = vec4(new_col.r, new_col.g, new_col.b, min(colorize, texture(TEXTURE, UV).a));
+	
+	if (outline){
+		if ((texture(TEXTURE, UV + vec2(pix_size.x, 0.0)).a > 0.0 ||
+			texture(TEXTURE, UV + vec2(-pix_size.x, 0.0)).a > 0.0 ||
+			texture(TEXTURE, UV + vec2(0.0, pix_size.y)).a > 0.0 ||
+			texture(TEXTURE, UV + vec2(0.0, -pix_size.y)).a > 0.0 ||
+			texture(TEXTURE, UV + vec2(pix_size.x, pix_size.y)).a > 0.0 ||
+			texture(TEXTURE, UV + vec2(-pix_size.x, pix_size.y)).a > 0.0 ||
+			texture(TEXTURE, UV + vec2(pix_size.x, -pix_size.y)).a > 0.0 ||
+			texture(TEXTURE, UV + vec2(-pix_size.x, -pix_size.y)).a > 0.0) && col.a == 0.0){
+			COLOR = outline_col;
+		}
+	}
+	
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7qfn2"]
+resource_local_to_scene = true
+shader = SubResource("Shader_gbdaw")
+shader_parameter/outline_col = Color(1, 1, 1, 1)
+shader_parameter/outline = true
+shader_parameter/new_col = Color(1, 1, 1, 1)
+shader_parameter/colorize = 0.0
+shader_parameter/size = Vector2(104, 144)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rdrce"]
-size = Vector2(72, 96)
+size = Vector2(104, 144)
 
 [node name="CurseCard" type="Node2D"]
 script = ExtResource("1_xs56f")
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(36, 48)
-scale = Vector2(0.5625, 0.75)
-texture = ExtResource("1_rdrce")
+[node name="SpritePivot" type="Node2D" parent="."]
+position = Vector2(52, 72)
+
+[node name="CardSprite" type="Sprite2D" parent="SpritePivot"]
+material = SubResource("ShaderMaterial_k41ne")
+position = Vector2(-52, -72)
+texture = ExtResource("2_p06a0")
+centered = false
+
+[node name="Icon" type="Sprite2D" parent="SpritePivot"]
+position = Vector2(-24, -41)
+texture = ExtResource("3_jgh6w")
+centered = false
+
+[node name="Name" type="RichTextLabel" parent="SpritePivot"]
+clip_contents = false
+offset_left = -41.0
+offset_top = -56.0
+offset_right = 41.0
+offset_bottom = -46.0
+theme_override_fonts/normal_font = ExtResource("3_p06a0")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "TEST"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Desc" type="RichTextLabel" parent="SpritePivot"]
+clip_contents = false
+offset_left = -38.0
+offset_top = 16.0
+offset_right = 38.0
+offset_bottom = 56.0
+theme_override_fonts/normal_font = ExtResource("3_p06a0")
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "DESC"
+scroll_active = false
+
+[node name="CardSpriteFlash" type="Sprite2D" parent="SpritePivot"]
+material = SubResource("ShaderMaterial_7qfn2")
+position = Vector2(-52, -72)
+texture = ExtResource("2_p06a0")
+centered = false
 
 [node name="MouseArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MouseArea"]
-position = Vector2(36, 48)
+position = Vector2(52, 72)
 shape = SubResource("RectangleShape2D_rdrce")

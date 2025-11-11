@@ -78,23 +78,23 @@ func _process(delta):
 	mouse_dir = global_position.direction_to(get_global_mouse_position())
 
 
-	var light_lerp_pow = 0.5
+	# var light_lerp_pow = 0.5
 
-	# Active light stuff
-	if Input.is_action_pressed("m2") and light_active:
-		light_pivot.global_position = lerp($LightPivot.global_position, get_global_mouse_position(), light_lerp_pow)
-		light_pivot.scale = lerp($LightPivot.scale, float_to_vec(cal_light_scale(ACTIVE_LIGHT_SCALE)), light_lerp_pow)
-		light_pow -= delta
-		if light_pow <= 0.0:
-			light_active = false
-	else:
-		light_pivot.global_position = lerp($LightPivot.global_position, global_position, light_lerp_pow)
-		light_pivot.scale = lerp($LightPivot.scale, float_to_vec(cal_light_scale(PLAYER_LIGHT_SCALE)), light_lerp_pow)
-		light_pow += delta * 2.0
-		if light_pow > DEF_LIGHT_POW/2.0:
-			light_active = true
-			if light_pow > DEF_LIGHT_POW:
-				light_pow = DEF_LIGHT_POW
+	# # Active light stuff
+	# if Input.is_action_pressed("m2") and light_active:
+	# 	light_pivot.global_position = lerp($LightPivot.global_position, get_global_mouse_position(), light_lerp_pow)
+	# 	light_pivot.scale = lerp($LightPivot.scale, float_to_vec(cal_light_scale(ACTIVE_LIGHT_SCALE)), light_lerp_pow)
+	# 	light_pow -= delta
+	# 	if light_pow <= 0.0:
+	# 		light_active = false
+	# else:
+	# 	light_pivot.global_position = lerp($LightPivot.global_position, global_position, light_lerp_pow)
+	# 	light_pivot.scale = lerp($LightPivot.scale, float_to_vec(cal_light_scale(PLAYER_LIGHT_SCALE)), light_lerp_pow)
+	# 	light_pow += delta * 2.0
+	# 	if light_pow > DEF_LIGHT_POW/2.0:
+	# 		light_active = true
+	# 		if light_pow > DEF_LIGHT_POW:
+	# 			light_pow = DEF_LIGHT_POW
 
 	point_light.energy = 1.0 * (float(light_pow)/DEF_LIGHT_POW)
 
@@ -155,6 +155,9 @@ func _process(delta):
 
 		Global.hp_indicator.set_progress(hp / MAX_HP)
 
+	if hp > MAX_HP:
+		hp = MAX_HP
+
 	if invin > 0.0:
 		modulate.a = abs(cos(Time.get_ticks_msec()/100.0))
 		invin -= delta
@@ -164,6 +167,24 @@ func _process(delta):
 
 
 func _physics_process(delta):
+	var light_lerp_pow = 0.5
+
+	# Active light stuff
+	if Input.is_action_pressed("m2") and light_active:
+		light_pivot.global_position = lerp($LightPivot.global_position, get_global_mouse_position(), light_lerp_pow * delta * 60)
+		light_pivot.scale = lerp($LightPivot.scale, float_to_vec(cal_light_scale(ACTIVE_LIGHT_SCALE)), light_lerp_pow * delta * 60)
+		light_pow -= delta
+		if light_pow <= 0.0:
+			light_active = false
+	else:
+		light_pivot.global_position = lerp($LightPivot.global_position, global_position, light_lerp_pow * delta * 60)
+		light_pivot.scale = lerp($LightPivot.scale, float_to_vec(cal_light_scale(PLAYER_LIGHT_SCALE)), light_lerp_pow * delta * 60)
+		light_pow += delta * 2.0
+		if light_pow > DEF_LIGHT_POW/2.0:
+			light_active = true
+			if light_pow > DEF_LIGHT_POW:
+				light_pow = DEF_LIGHT_POW
+
 	velocity = ( p_input * SPD ) + added_velo
 
 	added_velo = lerp(added_velo, Vector2.ZERO, 0.1)

@@ -1,18 +1,40 @@
-[gd_scene load_steps=3 format=3 uid="uid://d0gdnghceog14"]
+[gd_scene load_steps=4 format=3 uid="uid://d0gdnghceog14"]
 
 [ext_resource type="PackedScene" uid="uid://cbhb18adwsxe1" path="res://src/object/card/curse_card.tscn" id="1_mhh4k"]
 [ext_resource type="Script" uid="uid://blhqqgmpo52jx" path="res://src/ui/card_layer.gd" id="1_x8ghf"]
+[ext_resource type="FontFile" uid="uid://cq720iumon812" path="res://asset/ui/Cardo-Bold.ttf" id="3_3tgpg"]
 
 [node name="CardLayer" type="CanvasLayer"]
 process_mode = 3
 layer = 2
 script = ExtResource("1_x8ghf")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -53.0
+offset_top = -28.0
+offset_right = 593.0
+offset_bottom = 423.0
+mouse_filter = 1
+color = Color(0, 0, 0, 0.505882)
+
 [node name="CurseCard1" parent="." instance=ExtResource("1_mhh4k")]
-position = Vector2(135, 160)
+position = Vector2(72, 128)
 
 [node name="CurseCard2" parent="." instance=ExtResource("1_mhh4k")]
-position = Vector2(240, 160)
+position = Vector2(218, 128)
 
 [node name="CurseCard3" parent="." instance=ExtResource("1_mhh4k")]
-position = Vector2(353, 160)
+position = Vector2(373, 128)
+
+[node name="TextLabel" type="RichTextLabel" parent="."]
+clip_contents = false
+offset_top = 65.0
+offset_right = 550.0
+offset_bottom = 105.0
+theme_override_fonts/normal_font = ExtResource("3_3tgpg")
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
+text = "[shake rate=60.0 level=20][wave connected=0]SELECT  A  CURSE"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

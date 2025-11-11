@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ReloadAmpCurse" load_steps=3 format=3 uid="uid://cr74xh2gdtuh"]
+
+[ext_resource type="Script" uid="uid://cxtu12fwf32hk" path="res://src/object/card/curses/reload_amp.gd" id="1_2cym2"]
+[ext_resource type="Texture2D" uid="uid://cdqrvd5pqu6w8" path="res://asset/ui/card/icons/reload_amp_icon.png" id="1_vc37q"]
+
+[resource]
+script = ExtResource("1_2cym2")
+reload_reduction = 0.1
+ammo_cap_reduction = 0.05
+curse_icon = ExtResource("1_vc37q")
+display_name = "[shake rate=20.0 level=6 connected=0][rainbow][ SHAKIN' HAND ]"
+desc = "(+) Reload faster by 10%
+(-) Clip size decrease by 5%"
+metadata/_custom_type_script = "uid://cxtu12fwf32hk"

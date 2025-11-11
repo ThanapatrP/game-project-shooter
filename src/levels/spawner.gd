@@ -9,8 +9,6 @@ var enemy_scene = preload("res://src/characters/enemy/running_enemy.tscn")
 
 func _ready() -> void:
 	randomize()
-	PauseParasite.create(self)
-
 	curr_spawn_t = randf_range(spawn_cd.get(0), spawn_count.get(1))
 
 func _physics_process(delta: float) -> void:
@@ -32,6 +30,6 @@ func spawn():
 
 	var new_ene = enemy_scene.instantiate() as Node2D
 
-	new_ene.global_position = Vector2(randf_range(-32, 320+32), randf_range(-32, 180+32))
+	new_ene.global_position = Vector2(randf_range(-32, 550+32), randf_range(-32, 390+32))
 	
 	get_tree().current_scene.add_child(new_ene)

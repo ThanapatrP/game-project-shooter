@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="DamageMultCurse" load_steps=2 format=3 uid="uid://tlw6hoh86i34"]
-
-[ext_resource type="Script" uid="uid://blwaa4e0iei8e" path="res://src/object/card/curses/damage_mult_curse.gd" id="1_px0e3"]
-
-[resource]
-script = ExtResource("1_px0e3")
-add_dmg_mult = 0.1
-hp_reduction = 0.1
-metadata/_custom_type_script = "uid://blwaa4e0iei8e"

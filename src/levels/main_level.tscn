@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://co30y8baliqso"]
+[gd_scene load_steps=22 format=3 uid="uid://co30y8baliqso"]
 
+[ext_resource type="Script" uid="uid://bs38ixu1q2ixm" path="res://src/levels/main_level.gd" id="1_acb5s"]
 [ext_resource type="PackedScene" uid="uid://c2uvr2f2eld2n" path="res://src/characters/player/player.tscn" id="1_b6xw5"]
 [ext_resource type="Script" uid="uid://dlkm2ubumia7v" path="res://src/levels/spawner.gd" id="2_ctyfj"]
 [ext_resource type="Script" uid="uid://djtoury4cj4ex" path="res://src/levels/hp_bar_pivot.gd" id="3_11df1"]
@@ -10,14 +11,95 @@
 [ext_resource type="Script" uid="uid://cpfugg5pyr134" path="res://src/ui/score_label.gd" id="8_ywe2d"]
 [ext_resource type="Texture2D" uid="uid://bdfs3bbusy52" path="res://asset/ui/ui_overlays/cat_hurts_overlay.png" id="9_tygi3"]
 [ext_resource type="Script" uid="uid://benpvdb4y2nyl" path="res://src/ui/hurt_overlay.gd" id="10_twkqo"]
+[ext_resource type="Shader" uid="uid://h5vycgvjqly1" path="res://src/shader/invert_text.gdshader" id="11_3ksew"]
 [ext_resource type="PackedScene" uid="uid://d0gdnghceog14" path="res://src/ui/card_layer.tscn" id="11_av45r"]
+[ext_resource type="FontFile" uid="uid://cq720iumon812" path="res://asset/ui/Cardo-Bold.ttf" id="11_fvmyw"]
 [ext_resource type="PackedScene" uid="uid://cwsp1ptrx6men" path="res://src/ui/hp_indicator.tscn" id="12_av45r"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tygi3"]
 light_mode = 1
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_acb5s"]
+shader = ExtResource("11_3ksew")
+
+[sub_resource type="GDScript" id="GDScript_3ksew"]
+script/source = "extends RichTextLabel
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="Animation" id="Animation_3ksew"]
+resource_name = "LevelUpBlink"
+length = 0.700003
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["[wave freq=20 connected=0]LEVEL UP"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_acb5s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["KILL 'EM ALL"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_acb5s"]
+_data = {
+&"LevelUpBlink": SubResource("Animation_3ksew"),
+&"RESET": SubResource("Animation_acb5s")
+}
+
 [node name="Level" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_acb5s")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true
@@ -94,6 +176,25 @@ script = ExtResource("10_twkqo")
 
 [node name="HpIndicator" parent="UILayer" instance=ExtResource("12_av45r")]
 position = Vector2(11, 319)
+
+[node name="InvertText" type="RichTextLabel" parent="UILayer"]
+visible = false
+material = SubResource("ShaderMaterial_acb5s")
+offset_right = 550.0
+offset_bottom = 390.0
+theme_override_fonts/normal_font = ExtResource("11_fvmyw")
+theme_override_font_sizes/normal_font_size = 71
+bbcode_enabled = true
+text = "KILL 'EM ALL"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = SubResource("GDScript_3ksew")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UILayer/InvertText"]
+process_mode = 3
+libraries = {
+&"": SubResource("AnimationLibrary_acb5s")
+}
 
 [node name="CardLayer" parent="." instance=ExtResource("11_av45r")]
 

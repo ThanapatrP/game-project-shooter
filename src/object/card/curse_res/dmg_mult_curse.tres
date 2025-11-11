@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="DamageMultCurse" load_steps=3 format=3 uid="uid://tlw6hoh86i34"]
+
+[ext_resource type="Texture2D" uid="uid://dn8qcc3h6ea0a" path="res://asset/ui/card/icons/dmg_mult_icon.png" id="1_lp0lj"]
+[ext_resource type="Script" uid="uid://blwaa4e0iei8e" path="res://src/object/card/curses/damage_mult_curse.gd" id="2_5882v"]
+
+[resource]
+script = ExtResource("2_5882v")
+add_dmg_mult = 0.1
+hp_reduction = 0.1
+curse_icon = ExtResource("1_lp0lj")
+display_name = "[wave][rainbow][ BLOOD FOR BLOOD ]"
+desc = "(+) Damage increase by []10%
+(-) Also decrease HP by 10%"
+metadata/_custom_type_script = "uid://blwaa4e0iei8e"
