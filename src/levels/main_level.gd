@@ -9,3 +9,7 @@ func _ready() -> void:
 func _exit_tree() -> void:
 	Global.main_level = null
 	Global.invert_text = null
+
+
+func _process(delta: float) -> void:
+	$UILayer/InvertText/AnimationPlayer.speed_scale = 1.0 / Engine.time_scale

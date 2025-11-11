@@ -44,17 +44,16 @@ func add_score(amt):
 			var tween := create_tween()
 			tween.set_ignore_time_scale()
 
-			await tween.tween_property(Engine, "time_scale", 0.0, 0.5).finished
+			if invert_text:
+				invert_text.get_node("AnimationPlayer").play("LevelUpBlink")
+
+			await tween.tween_property(Engine, "time_scale", 0.0, 0.7).finished
 			get_tree().paused = true
 
 			if debug:
 				print("FINISH")
 
 			Engine.time_scale = 1.0
-
-			if invert_text:
-				invert_text.get_node("AnimationPlayer").play("LevelUpBlink")
-				await invert_text.get_node("AnimationPlayer").animation_finished
 
 			card_layer.activate_ui()
 

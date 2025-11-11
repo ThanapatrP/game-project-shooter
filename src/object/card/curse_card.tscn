@@ -84,7 +84,7 @@ void fragment() {
 resource_local_to_scene = true
 shader = SubResource("Shader_gbdaw")
 shader_parameter/outline_col = Color(1, 1, 1, 1)
-shader_parameter/outline = true
+shader_parameter/outline = false
 shader_parameter/new_col = Color(1, 1, 1, 1)
 shader_parameter/colorize = 0.0
 shader_parameter/size = Vector2(104, 144)
@@ -115,6 +115,7 @@ offset_left = -41.0
 offset_top = -56.0
 offset_right = 41.0
 offset_bottom = -46.0
+theme_override_constants/outline_size = 0
 theme_override_fonts/normal_font = ExtResource("3_p06a0")
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true

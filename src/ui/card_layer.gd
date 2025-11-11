@@ -43,7 +43,14 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed("m1") and hovering_card != null and selected == false:
 			if hovering_card.curse != null and Global.player != null:
 				hovering_card.curse.apply(Global.player)
+				
+				# JUICE
 				hovering_card.flash()
+				hovering_card.sprite_pivot.scale = Vector2(1.2, 1.2)
+				hovering_card.sprite_pivot.rotation_degrees = 15
+
+				if Global.cursor:
+					Global.cursor.set_cursor_transform(Vector2(1.2,1.2), -5)
 
 				for c in cards:
 					c.can_hover = false
@@ -51,7 +58,7 @@ func _process(delta: float) -> void:
 				selected = true
 				hovering_card.selected = true
 
-				await get_tree().create_timer(1.2).timeout
+				await get_tree().create_timer(0.5).timeout
 
 			deactivate_ui()
    

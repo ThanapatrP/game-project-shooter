@@ -8,7 +8,7 @@ script = ExtResource("1_2cym2")
 reload_reduction = 0.1
 ammo_cap_reduction = 0.05
 curse_icon = ExtResource("1_vc37q")
-display_name = "[shake rate=20.0 level=6 connected=0][rainbow][ SHAKIN' HAND ]"
+display_name = "[shake rate=20.0 level=6 connected=0][color=red][ SHAKIN' HAND ]"
 desc = "(+) Reload faster by 10%
 (-) Clip size decrease by 5%"
 metadata/_custom_type_script = "uid://cxtu12fwf32hk"

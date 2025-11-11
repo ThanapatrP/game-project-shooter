@@ -127,7 +127,7 @@ func _process(delta):
 			if Global.cursor:
 				Global.cursor.set_cursor_sprite(Global.cursor.Cursor.CROSSHAIR)
 				Global.cursor.set_cursor_transform(Vector2(2.1, 2.1), -30)
-			ammo = 30
+			ammo = MAX_AMMO
 			reload_audio_player.stop()
 			reload_audio_player.stream = sfx_reload_complete
 			reload_audio_player.play()
