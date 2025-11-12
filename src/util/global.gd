@@ -19,9 +19,11 @@ var invert_text : RichTextLabel = null
 # Score stuff
 var curr_score = 0
 var highscore = 0
-var next_card_score = 300
+var next_card_score = 0
 var score_stack = 0
-var next_stack_mult = 1.2
+var next_stack_mult = 1.0
+const DEF_NEXT_CARD_SCORE = 500
+const DEF_NEXT_STACK_MULT = 1.2
 
 # Signals
 signal pause
@@ -29,6 +31,7 @@ signal resume
 
 # Debug
 var debug = true
+
 
 func add_score(amt):
 	if amt < 0:
@@ -69,9 +72,9 @@ func add_score(amt):
 
 func reset_score():
 	curr_score = 0
-	next_card_score = 300
+	next_card_score = DEF_NEXT_CARD_SCORE
 	score_stack = 0
-	next_stack_mult = 1.2
+	next_stack_mult = DEF_NEXT_STACK_MULT
 
 # save load stuff
 func load_data():
@@ -79,6 +82,8 @@ func load_data():
 
 
 func _ready() -> void:
+	reset_score()
+
 	process_mode = ProcessMode.PROCESS_MODE_ALWAYS
 
 	connect("pause",

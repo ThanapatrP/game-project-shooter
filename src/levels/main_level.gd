@@ -14,4 +14,5 @@ func _exit_tree() -> void:
 func _process(delta: float) -> void:
 	$UILayer/InvertText/AnimationPlayer.speed_scale = 1.0 / Engine.time_scale
 	if Global.debug:
+		pass
 		print($UILayer/InvertText.visible)

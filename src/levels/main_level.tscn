@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://co30y8baliqso"]
+[gd_scene load_steps=20 format=3 uid="uid://co30y8baliqso"]
 
 [ext_resource type="Script" uid="uid://bs38ixu1q2ixm" path="res://src/levels/main_level.gd" id="1_acb5s"]
 [ext_resource type="PackedScene" uid="uid://c2uvr2f2eld2n" path="res://src/characters/player/player.tscn" id="1_b6xw5"]
@@ -6,13 +6,12 @@
 [ext_resource type="Script" uid="uid://djtoury4cj4ex" path="res://src/levels/hp_bar_pivot.gd" id="3_11df1"]
 [ext_resource type="Script" uid="uid://0rf7u1t2yp73" path="res://src/util/custom_camera.gd" id="5_ctyfj"]
 [ext_resource type="PackedScene" uid="uid://whcd4uekaxv6" path="res://src/ui/cursor.tscn" id="6_11df1"]
-[ext_resource type="FontFile" uid="uid://7ip1rh1cottq" path="res://asset/ui/Smol font.ttf" id="6_k0jp4"]
 [ext_resource type="Texture2D" uid="uid://dm8gi5bulobax" path="res://asset/level/temp_level_bg.png" id="8_1du40"]
 [ext_resource type="Script" uid="uid://cpfugg5pyr134" path="res://src/ui/score_label.gd" id="8_ywe2d"]
 [ext_resource type="Texture2D" uid="uid://bdfs3bbusy52" path="res://asset/ui/ui_overlays/cat_hurts_overlay.png" id="9_tygi3"]
 [ext_resource type="Script" uid="uid://benpvdb4y2nyl" path="res://src/ui/hurt_overlay.gd" id="10_twkqo"]
 [ext_resource type="Shader" path="res://src/shader/invert_text.gdshader" id="11_3ksew"]
-[ext_resource type="PackedScene" path="res://src/ui/card_layer.tscn" id="11_av45r"]
+[ext_resource type="PackedScene" uid="uid://c8opr81murdxm" path="res://src/ui/card_layer.tscn" id="11_av45r"]
 [ext_resource type="FontFile" uid="uid://cq720iumon812" path="res://asset/ui/Cardo-Bold.ttf" id="11_fvmyw"]
 [ext_resource type="PackedScene" uid="uid://cwsp1ptrx6men" path="res://src/ui/hp_indicator.tscn" id="12_av45r"]
 
@@ -139,15 +138,16 @@ color = Color(0, 0.729565, 0.0597753, 1)
 [node name="ScoreLabel" type="RichTextLabel" parent="UILayer"]
 offset_top = 12.0
 offset_right = 550.0
-offset_bottom = 43.0
+offset_bottom = 51.0
 theme_override_colors/font_shadow_color = Color(1, 0, 0.0166664, 1)
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_outline_size = 0
-theme_override_fonts/normal_font = ExtResource("6_k0jp4")
+theme_override_fonts/normal_font = ExtResource("11_fvmyw")
 theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 text = "SCORE : XXXX"
+scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("8_ywe2d")

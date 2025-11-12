@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0gdnghceog14"]
+[gd_scene load_steps=4 format=3 uid="uid://c8opr81murdxm"]
 
 [ext_resource type="PackedScene" uid="uid://cbhb18adwsxe1" path="res://src/object/card/curse_card.tscn" id="1_mhh4k"]
-[ext_resource type="Script" uid="uid://blhqqgmpo52jx" path="res://src/ui/card_layer.gd" id="1_x8ghf"]
+[ext_resource type="Script" path="res://src/ui/card_layer.gd" id="1_x8ghf"]
 [ext_resource type="FontFile" uid="uid://cq720iumon812" path="res://asset/ui/Cardo-Bold.ttf" id="3_3tgpg"]
 
 [node name="CardLayer" type="CanvasLayer"]
