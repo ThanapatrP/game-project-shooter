@@ -45,13 +45,19 @@ func add_score(amt):
 			tween.set_ignore_time_scale()
 
 			if invert_text:
+				print("play!")
 				invert_text.get_node("AnimationPlayer").play("LevelUpBlink")
 
-			await tween.tween_property(Engine, "time_scale", 0.0, 0.7).finished
+			await tween.tween_property(Engine, "time_scale", 0.01, 0.7).finished
+
+			invert_text.get_node("AnimationPlayer").stop()
+			invert_text.get_node("AnimationPlayer").speed_scale = 1.0
+			invert_text.visible = false
 			get_tree().paused = true
 
 			if debug:
-				print("FINISH")
+				pass
+				# print("FINISH")
 
 			Engine.time_scale = 1.0
 
