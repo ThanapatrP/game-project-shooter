@@ -13,12 +13,12 @@ var wasd_sprite_frame : SpriteFrames = preload("res://src/ui/tutorial/sprite_fra
 var m1_sprite_frame : SpriteFrames = preload("res://src/ui/tutorial/sprite_frame/m1_sprite_frame.tres")
 var m2_sprite_frame : SpriteFrames = preload("res://src/ui/tutorial/sprite_frame/m2_sprite_frame.tres")
 
+var dead_layer = preload("res://src/ui/dead_layer.tscn")
+
 @onready var generic_label : RichTextLabel = $GenericLabel
 @onready var generic_sprite : AnimatedSprite2D = $GenericSprite
 
 @onready var center_light : Light2D = $CenterLight
-
-
 
 func _ready() -> void:
 	# setup singleton node ref
@@ -28,13 +28,23 @@ func _ready() -> void:
 	$Spawner.set_physics_process(false)
 	$Spawner.set_process(false)
 
+	$UILayer/ImpactFrame.visible = false
+
+	$UILayer/FadeOutRect.color.a = 1.0
+	var tween := create_tween()
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.tween_property($UILayer/FadeOutRect, "color:a", 0.0, 0.8)
+
+
 func _exit_tree() -> void:
 	Global.main_level = null
 	Global.invert_text = null
 
 
 func _process(delta: float) -> void:
-	$UILayer/InvertText/AnimationPlayer.speed_scale = 1.0 / Engine.time_scale
+	if $UILayer/InvertText/AnimationPlayer:
+		$UILayer/InvertText/AnimationPlayer.speed_scale = 1.0 / Engine.time_scale
 	if Global.debug:
 		pass
 		# print($UILayer/InvertText.visible)
@@ -42,10 +52,20 @@ func _process(delta: float) -> void:
 	tutorial_queue()
 
 func restart():
-	$Spawner.queue_free()
+	$UILayer/ImpactFrame.visible = true
 
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(3.0/60.0).timeout
 
+	$UILayer/ImpactFrame.color = Color.RED
+
+	await get_tree().create_timer(3.0/60.0).timeout
+
+	for node in get_children():
+		node.queue_free()
+
+	add_child(dead_layer.instantiate())
+
+	await get_tree().create_timer(5).timeout
 	get_tree().reload_current_scene()
 	pass
 

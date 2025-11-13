@@ -1,0 +1,352 @@
+[gd_scene load_steps=7 format=3 uid="uid://cnjx74rxponyl"]
+
+[ext_resource type="FontFile" uid="uid://cq720iumon812" path="res://asset/ui/Cardo-Bold.ttf" id="1_57dqn"]
+[ext_resource type="Script" uid="uid://cwhify4jfo0rd" path="res://src/ui/dead_layer.gd" id="1_adk6k"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3ksew"]
+light_mode = 1
+
+[sub_resource type="Animation" id="Animation_adk6k"]
+resource_name = "StartDisplay"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DeadLabel:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.166667, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": ["[shake rate=100 level=50]YOU'RE DEAD!", "[shake rate=100 level=50]YOU'RE DEAD!", "[shake rate=100 level=25]YOU'RE DEAD!", "YOU'RE DEAD!"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DeadLabel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScoreHeader:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.566667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ScoreDigitLabel:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("NewHighscoreLabel:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("OldHighscoreHeader:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("OldHighscoreDigitLabel:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("RestartPrompt:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_80c0p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DeadLabel:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["YOU'RE DEAD!"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DeadLabel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScoreHeader:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ScoreDigitLabel:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("NewHighscoreLabel:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("OldHighscoreHeader:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("OldHighscoreDigitLabel:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("RestartPrompt:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_80c0p"]
+_data = {
+&"RESET": SubResource("Animation_80c0p"),
+&"StartDisplay": SubResource("Animation_adk6k")
+}
+
+[node name="DeadLayer" type="CanvasLayer"]
+layer = 4
+script = ExtResource("1_adk6k")
+
+[node name="DeadLabel" type="RichTextLabel" parent="."]
+visible = false
+material = SubResource("CanvasItemMaterial_3ksew")
+clip_contents = false
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 131.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("1_57dqn")
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "YOU'RE DEAD!"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreHeader" type="RichTextLabel" parent="."]
+visible = false
+material = SubResource("CanvasItemMaterial_3ksew")
+clip_contents = false
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 121.0
+offset_bottom = 184.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("1_57dqn")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Score"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreDigitLabel" type="RichTextLabel" parent="."]
+visible = false
+material = SubResource("CanvasItemMaterial_3ksew")
+clip_contents = false
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 157.0
+offset_bottom = 220.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("1_57dqn")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "XXXXX"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NewHighscoreLabel" type="RichTextLabel" parent="."]
+visible = false
+material = SubResource("CanvasItemMaterial_3ksew")
+clip_contents = false
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 191.0
+offset_bottom = 254.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("1_57dqn")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[wave amp=50][rainbow val=1 sat=0.5 speed=3]NEW HIGHSCORE"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OldHighscoreHeader" type="RichTextLabel" parent="."]
+visible = false
+material = SubResource("CanvasItemMaterial_3ksew")
+clip_contents = false
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 236.0
+offset_bottom = 299.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("1_57dqn")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Highscore"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OldHighscoreDigitLabel" type="RichTextLabel" parent="."]
+visible = false
+material = SubResource("CanvasItemMaterial_3ksew")
+clip_contents = false
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 260.0
+offset_bottom = 323.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("1_57dqn")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "XXXXXXX"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartPrompt" type="RichTextLabel" parent="."]
+visible = false
+material = SubResource("CanvasItemMaterial_3ksew")
+clip_contents = false
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 312.0
+offset_bottom = 375.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("1_57dqn")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[pulse freq=4][ Press SPACEBAR to restart ]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_80c0p")
+}

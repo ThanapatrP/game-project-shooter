@@ -97,7 +97,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_ul4kp"]
 resource_name = "KillEm"
-length = 1.33334
+length = 1.66667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -105,10 +105,10 @@ tracks/0/path = NodePath(".:text")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.5, 0.6, 1, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.0666667, 0.1, 0.5, 0.566667, 0.6, 1, 1.06667, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": ["[shake rate=30.0 level=100]GO[/shake][color=transparent] KILL 'EM", "GO[color=transparent] KILL 'EM", "GO [shake rate=30 level=100]KILL[color=transparent] 'EM", "GO KILL[color=transparent] 'EM", "GO KILL [shake rate=30 level=100]'EM", "GO KILL 'EM"]
+"values": ["[shake rate=100.0 level=100]GO[/shake][color=transparent] KILL 'EM", "[shake rate=100.0 level=30]GO[/shake][color=transparent] KILL 'EM", "GO[color=transparent] KILL 'EM", "GO [shake rate=100 level=100]KILL[color=transparent] 'EM", "GO [shake rate=100 level=30]KILL[color=transparent] 'EM", "GO KILL[color=transparent] 'EM", "GO KILL [shake rate=100 level=100]'EM", "GO KILL [shake rate=100 level=30]'EM", "GO KILL 'EM"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -117,7 +117,7 @@ tracks/1/path = NodePath(".:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.33333),
+"times": PackedFloat32Array(0, 1.66667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -132,13 +132,13 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.5, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
-"args": [0.2, 30.0],
+"args": [0.1, 30.0],
 "method": &"shake"
 }, {
-"args": [0.2, 30.0],
+"args": [0.1, 30.0],
 "method": &"shake"
 }, {
-"args": [0.2, 30.0],
+"args": [0.1, 30.0],
 "method": &"shake"
 }]
 }
@@ -274,6 +274,22 @@ process_mode = 3
 libraries = {
 &"": SubResource("AnimationLibrary_acb5s")
 }
+
+[node name="ImpactFrame" type="ColorRect" parent="UILayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FadeOutRect" type="ColorRect" parent="UILayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
 
 [node name="CardLayer" parent="." instance=ExtResource("11_av45r")]
 visible = false

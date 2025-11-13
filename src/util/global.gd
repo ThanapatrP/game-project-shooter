@@ -55,9 +55,13 @@ func add_score(amt):
 
 			await tween.tween_property(Engine, "time_scale", 0.01, 0.7).finished
 
-			invert_text.get_node("AnimationPlayer").stop()
-			invert_text.get_node("AnimationPlayer").speed_scale = 1.0
-			invert_text.visible = false
+			if invert_text:
+				invert_text.get_node("AnimationPlayer").stop()
+				invert_text.get_node("AnimationPlayer").speed_scale = 1.0
+				invert_text.visible = false
+			else:
+				return
+
 			get_tree().paused = true
 
 			if debug:

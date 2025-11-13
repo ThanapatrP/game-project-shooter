@@ -14,7 +14,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	curr_spawn_t -= delta
 
-	if curr_spawn_t < 0.0:
+	if curr_spawn_t < 0.0 or get_tree().get_node_count_in_group("Enemy") <= 0:
 		spawn_rand()
 		curr_spawn_t = randf_range(spawn_cd[0], spawn_cd[1])
 

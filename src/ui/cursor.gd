@@ -33,6 +33,7 @@ func _ready() -> void:
 		Global.cursor = self
 
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	global_position = get_global_mouse_position()
 
 	
 func _process(delta: float) -> void:
