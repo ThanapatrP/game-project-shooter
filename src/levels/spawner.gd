@@ -9,7 +9,7 @@ var enemy_scene = preload("res://src/characters/enemy/running_enemy.tscn")
 
 func _ready() -> void:
 	randomize()
-	curr_spawn_t = randf_range(spawn_cd.get(0), spawn_count.get(1))
+	curr_spawn_t = INF
 
 func _physics_process(delta: float) -> void:
 	curr_spawn_t -= delta

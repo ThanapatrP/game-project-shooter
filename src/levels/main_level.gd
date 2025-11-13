@@ -1,10 +1,32 @@
 extends Node2D
 
+# TUTORIAL
+enum TUTORIAL_STATE{
+	MOVEMENT,
+	SHOOT,
+	LIGHT
+}
+var curr_tutorial_state = TUTORIAL_STATE.MOVEMENT
+var player_complete_step = false
+
+var wasd_sprite_frame : SpriteFrames = preload("res://src/ui/tutorial/sprite_frame/wasd_sprite_frame.tres")
+var m1_sprite_frame : SpriteFrames = preload("res://src/ui/tutorial/sprite_frame/m1_sprite_frame.tres")
+var m2_sprite_frame : SpriteFrames = preload("res://src/ui/tutorial/sprite_frame/m2_sprite_frame.tres")
+
+@onready var generic_label : RichTextLabel = $GenericLabel
+@onready var generic_sprite : AnimatedSprite2D = $GenericSprite
+
+@onready var center_light : Light2D = $CenterLight
+
+
 
 func _ready() -> void:
 	# setup singleton node ref
 	Global.main_level = self
 	Global.invert_text = $UILayer/InvertText
+
+	$Spawner.set_physics_process(false)
+	$Spawner.set_process(false)
 
 func _exit_tree() -> void:
 	Global.main_level = null
@@ -15,4 +37,99 @@ func _process(delta: float) -> void:
 	$UILayer/InvertText/AnimationPlayer.speed_scale = 1.0 / Engine.time_scale
 	if Global.debug:
 		pass
-		print($UILayer/InvertText.visible)
+		# print($UILayer/InvertText.visible)
+	
+	tutorial_queue()
+
+func restart():
+	$Spawner.queue_free()
+
+	await get_tree().create_timer(2).timeout
+
+	get_tree().reload_current_scene()
+	pass
+
+func tutorial_queue():
+	match curr_tutorial_state:
+		TUTORIAL_STATE.MOVEMENT:
+			if !player_complete_step:
+				generic_sprite.visible = true
+			generic_sprite.sprite_frames = wasd_sprite_frame
+			if !generic_sprite.is_playing():
+				generic_sprite.play("default")
+			if Global.player:
+				generic_sprite.global_position = Global.player.global_position + Vector2(-28, -57)
+			
+			if (Input.is_action_just_pressed("right") or
+				Input.is_action_just_pressed("left") or
+				Input.is_action_just_pressed("up") or
+				Input.is_action_just_pressed("down")) and !player_complete_step:
+
+					player_complete_step = true
+
+					generic_sprite.visible = false
+					await get_tree().create_timer(0.5).timeout
+
+					curr_tutorial_state = TUTORIAL_STATE.SHOOT
+
+					player_complete_step = false
+
+		TUTORIAL_STATE.SHOOT:
+			if !player_complete_step:
+				generic_sprite.visible = true
+			generic_sprite.sprite_frames = m1_sprite_frame
+
+			if !generic_sprite.is_playing():
+				generic_sprite.play("default")
+			if Global.player:
+				generic_sprite.global_position = Global.player.global_position + Vector2(-10, -43)
+
+			if Input.is_action_just_pressed("m1") and !player_complete_step:
+				player_complete_step = true
+
+				generic_sprite.visible = false
+				await get_tree().create_timer(0.4).timeout
+
+				var tween := create_tween()
+				tween.set_ease(Tween.EASE_IN_OUT)
+				tween.set_trans(Tween.TRANS_SINE)
+				tween.tween_property(center_light, "scale", Vector2(), 0.7)
+
+				await tween.finished
+
+				curr_tutorial_state = TUTORIAL_STATE.LIGHT
+
+				player_complete_step = false
+
+		TUTORIAL_STATE.LIGHT:
+			if !player_complete_step:
+				generic_sprite.visible = true
+			generic_sprite.sprite_frames = m2_sprite_frame
+
+			if !generic_sprite.is_playing():
+				generic_sprite.play("default")
+			if Global.player:
+				generic_sprite.global_position = get_global_mouse_position() + Vector2(-10, -43)
+
+			if Input.is_action_just_pressed("m2") and !player_complete_step:
+				player_complete_step = true
+
+				generic_sprite.visible = false
+				await get_tree().create_timer(0.4).timeout
+
+				if Global.invert_text:
+					generic_sprite.visible = false
+
+					Global.invert_text.get_node("AnimationPlayer").play("KillEm")
+					await Global.invert_text.get_node("AnimationPlayer").animation_finished
+
+					Global.invert_text.visible = false
+
+				$Spawner.set_physics_process(true)
+				$Spawner.set_process(true)
+
+				$Spawner.curr_spawn_t = 1
+
+				curr_tutorial_state = -1
+
+				player_complete_step = false

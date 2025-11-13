@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://71g3m64tc3fs"]
+
+[ext_resource type="Texture2D" uid="uid://dvv5taj8m6x3v" path="res://asset/ui/tutorial/wasd_sheet.png" id="1_2lskk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymoru"]
+atlas = ExtResource("1_2lskk")
+region = Rect2(56, 0, 56, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lni2v"]
+atlas = ExtResource("1_2lskk")
+region = Rect2(112, 0, 56, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gcuqk"]
+atlas = ExtResource("1_2lskk")
+region = Rect2(168, 0, 56, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fds8a"]
+atlas = ExtResource("1_2lskk")
+region = Rect2(224, 0, 56, 37)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymoru")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lni2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gcuqk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fds8a")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]

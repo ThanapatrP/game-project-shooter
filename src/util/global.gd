@@ -25,6 +25,8 @@ var next_stack_mult = 1.0
 const DEF_NEXT_CARD_SCORE = 500
 const DEF_NEXT_STACK_MULT = 1.2
 
+var player_card = 0
+
 # Signals
 signal pause
 signal resume
@@ -75,6 +77,7 @@ func reset_score():
 	next_card_score = DEF_NEXT_CARD_SCORE
 	score_stack = 0
 	next_stack_mult = DEF_NEXT_STACK_MULT
+	player_card = 0
 
 # save load stuff
 func load_data():

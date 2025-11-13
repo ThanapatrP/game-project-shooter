@@ -18,7 +18,7 @@ var mouse_dir : Vector2 = Vector2.ZERO
 var MAX_HP = 100.0
 var hp = 100.0
 var invin = -1.0
-
+var DEF_INVIN = 3.0
 
 # Shoot stuff
 var DEF_SHOOT_CD = 0.1
@@ -53,6 +53,7 @@ var sfx_reload_complete = preload("res://asset/sfx/reload_complete.mp3")
 @onready var gun_audio_stream : AudioStreamPlayer = $GunAudioStream
 @onready var reload_audio_player : AudioStreamPlayer = $ReloadAudioStream
 @onready var reload_loop_audio_player : AudioStreamPlayer = $ReloadingAudioStream
+@onready var hitbox : Area2D = $Hitbox
 
 func _enter_tree() -> void:
 	Global.player = self
@@ -142,18 +143,25 @@ func _process(delta):
 		reload_loop_audio_player.playing = (reload_cd > 0.0)
 	
 	# On hit
-	if $Hitbox.get_overlapping_bodies().size() > 0 and invin <= 0.0:
-		if Global.hurt_overlay:
-			Global.hurt_overlay.start()
+	if hitbox.get_overlapping_bodies().size() > 0 and invin <= 0.0:
+		if hitbox.get_overlapping_bodies()[0] is Enemy:
+			hp -= hitbox.get_overlapping_bodies()[0].damage
+			invin = DEF_INVIN
 
-		if Global.camera:
-			Global.camera.shake(0.5, 15)
-			Global.hp_indicator.shake()
+			if Global.hurt_overlay:
+				Global.hurt_overlay.start()
 
-		hp -= 30
-		invin = 3.0
+			if Global.camera:
+				Global.camera.shake(0.5, 15)
 
-		Global.hp_indicator.set_progress(hp / MAX_HP)
+			if Global.hp_indicator:
+				Global.hp_indicator.shake()
+			
+			Global.hp_indicator.set_progress(hp / MAX_HP)
+
+			if hp <= 0.0 and Global.main_level:
+				Global.main_level.restart()
+				queue_free()
 
 	if hp > MAX_HP:
 		hp = MAX_HP
@@ -163,7 +171,6 @@ func _process(delta):
 		invin -= delta
 	else:
 		modulate.a = 1
-	
 
 
 func _physics_process(delta):

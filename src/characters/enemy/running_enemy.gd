@@ -3,6 +3,7 @@ extends Enemy
 var flashing_t = -1.0
 
 func _ready() -> void:
+	damage = 20
 	kb_mult = 2.5
 	$PositionMarker.self_modulate.a = 1.0
 

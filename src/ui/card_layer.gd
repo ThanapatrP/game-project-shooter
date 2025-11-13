@@ -43,6 +43,7 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed("m1") and hovering_card != null and selected == false:
 			if hovering_card.curse != null and Global.player != null:
 				hovering_card.curse.apply(Global.player)
+				Global.player_card += 1
 				
 				# JUICE
 				hovering_card.flash()

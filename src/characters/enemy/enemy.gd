@@ -4,12 +4,17 @@ extends CharacterBody2D
 var spd = 40
 var hp = 100
 
+var damage = 10
+
 var follow = null
 
 var dead_point = 100
 
 var kb_mult = 3
 var apply_knockback = true
+
+func _enter_tree() -> void:
+	add_to_group("Enemy")
 
 func apply_vel(to_glob_pos : Vector2):
 	velocity = lerp(velocity, global_position.direction_to(to_glob_pos) * spd, 0.1)

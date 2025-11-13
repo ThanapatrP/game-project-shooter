@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://co30y8baliqso"]
+[gd_scene load_steps=25 format=3 uid="uid://co30y8baliqso"]
 
 [ext_resource type="Script" uid="uid://bs38ixu1q2ixm" path="res://src/levels/main_level.gd" id="1_acb5s"]
 [ext_resource type="PackedScene" uid="uid://c2uvr2f2eld2n" path="res://src/characters/player/player.tscn" id="1_b6xw5"]
@@ -10,10 +10,29 @@
 [ext_resource type="Script" uid="uid://cpfugg5pyr134" path="res://src/ui/score_label.gd" id="8_ywe2d"]
 [ext_resource type="Texture2D" uid="uid://bdfs3bbusy52" path="res://asset/ui/ui_overlays/cat_hurts_overlay.png" id="9_tygi3"]
 [ext_resource type="Script" uid="uid://benpvdb4y2nyl" path="res://src/ui/hurt_overlay.gd" id="10_twkqo"]
-[ext_resource type="Shader" path="res://src/shader/invert_text.gdshader" id="11_3ksew"]
+[ext_resource type="Shader" uid="uid://h5vycgvjqly1" path="res://src/shader/invert_text.gdshader" id="11_3ksew"]
 [ext_resource type="PackedScene" uid="uid://c8opr81murdxm" path="res://src/ui/card_layer.tscn" id="11_av45r"]
 [ext_resource type="FontFile" uid="uid://cq720iumon812" path="res://asset/ui/Cardo-Bold.ttf" id="11_fvmyw"]
 [ext_resource type="PackedScene" uid="uid://cwsp1ptrx6men" path="res://src/ui/hp_indicator.tscn" id="12_av45r"]
+
+[sub_resource type="Gradient" id="Gradient_bxhu7"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.251082, 0.367965, 0.558442, 0.638743, 0.735931)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.592157, 1, 1, 1, 0.231373, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3ksew"]
+gradient = SubResource("Gradient_bxhu7")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_acb5s"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3ksew"]
+light_mode = 1
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tygi3"]
 light_mode = 1
@@ -76,8 +95,57 @@ tracks/1/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_ul4kp"]
+resource_name = "KillEm"
+length = 1.33334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5, 0.6, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": ["[shake rate=30.0 level=100]GO[/shake][color=transparent] KILL 'EM", "GO[color=transparent] KILL 'EM", "GO [shake rate=30 level=100]KILL[color=transparent] 'EM", "GO KILL[color=transparent] 'EM", "GO KILL [shake rate=30 level=100]'EM", "GO KILL 'EM"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.33333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%Camera2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [0.2, 30.0],
+"method": &"shake"
+}, {
+"args": [0.2, 30.0],
+"method": &"shake"
+}, {
+"args": [0.2, 30.0],
+"method": &"shake"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_acb5s"]
 _data = {
+&"KillEm": SubResource("Animation_ul4kp"),
 &"LevelUpBlink": SubResource("Animation_3ksew"),
 &"RESET": SubResource("Animation_acb5s")
 }
@@ -108,13 +176,39 @@ texture = ExtResource("8_1du40")
 
 [node name="Player" parent="." instance=ExtResource("1_b6xw5")]
 unique_name_in_owner = true
-position = Vector2(240, 249)
+position = Vector2(275, 194)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0, 0, 0, 1)
 
 [node name="Spawner" type="Node" parent="."]
 script = ExtResource("2_ctyfj")
+
+[node name="CenterLight" type="PointLight2D" parent="."]
+position = Vector2(278, 194)
+scale = Vector2(2.02946, 1.33243)
+blend_mode = 2
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_3ksew")
+
+[node name="GenericSprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_acb5s")
+position = Vector2(265, 151)
+centered = false
+
+[node name="GenericLabel" type="RichTextLabel" parent="."]
+material = SubResource("CanvasItemMaterial_3ksew")
+clip_contents = false
+offset_left = -112.0
+offset_top = 125.0
+offset_right = 130.0
+offset_bottom = 192.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("11_fvmyw")
+bbcode_enabled = true
+text = "TEST"
+scroll_active = false
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
@@ -182,6 +276,7 @@ libraries = {
 }
 
 [node name="CardLayer" parent="." instance=ExtResource("11_av45r")]
+visible = false
 
 [node name="CursorLayer" type="CanvasLayer" parent="."]
 layer = 3

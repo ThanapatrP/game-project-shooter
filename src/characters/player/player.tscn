@@ -20,13 +20,13 @@ light_mode = 1
 radius = 3.0
 height = 16.0
 
-[sub_resource type="Gradient" id="Gradient_bxhu7"]
+[sub_resource type="Gradient" id="Gradient_hhaut"]
 interpolation_mode = 1
 offsets = PackedFloat32Array(0.340314, 0.41048, 0.513089, 0.638743, 0.71466)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.831373, 1, 1, 1, 0.231373, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_5c1al"]
-gradient = SubResource("Gradient_bxhu7")
+gradient = SubResource("Gradient_hhaut")
 width = 256
 height = 256
 fill = 1
