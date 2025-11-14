@@ -24,6 +24,7 @@ var score_stack = 0
 var next_stack_mult = 1.0
 const DEF_NEXT_CARD_SCORE = 500
 const DEF_NEXT_STACK_MULT = 1.2
+var is_highscore = false
 
 var player_card = 0
 
@@ -57,8 +58,9 @@ func add_score(amt):
 	curr_score += amt
 	score_stack += amt
 
-	if curr_score >= highscore:
+	if curr_score > highscore:
 		highscore = curr_score
+		is_highscore = true
 
 	if score_stack > next_card_score:
 		score_stack = 0
@@ -98,12 +100,18 @@ func add_score(amt):
 		score_label.trigger_impulse_color()
 
 
+func set_hp_progress(new_progress):
+	if hp_indicator:
+		hp_indicator.set_progress(new_progress)
+
+
 func reset_score():
 	curr_score = 0
 	next_card_score = DEF_NEXT_CARD_SCORE
 	score_stack = 0
 	next_stack_mult = DEF_NEXT_STACK_MULT
 	player_card = 0
+	is_highscore = false
 
 # save load stuff
 func load_data():

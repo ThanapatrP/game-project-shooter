@@ -52,7 +52,7 @@ func _process(delta: float) -> void:
 		# print($UILayer/InvertText.visible)
 	
 	if curr_tutorial_state != TUTORIAL_STATE.NONE:
-		if Input.is_action_just_pressed("spacebar"):
+		if Input.is_action_just_pressed("spacebar") and Global.running_tween == null:
 			curr_tutorial_state = TUTORIAL_STATE.KILLEM
 
 			var tween := create_tween()
@@ -122,7 +122,11 @@ func tutorial_queue():
 				tween.set_trans(Tween.TRANS_SINE)
 				tween.tween_property(center_light, "scale", Vector2(), 0.7)
 
+				Global.running_tween = tween
+
 				await tween.finished
+
+				Global.running_tween = null
 
 				curr_tutorial_state = TUTORIAL_STATE.LIGHT
 

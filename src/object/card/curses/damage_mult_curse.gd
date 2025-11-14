@@ -12,5 +12,8 @@ extends Curse
 func apply(player : Player):
 	player.bullet_dmg_mult += add_dmg_mult
 	player.MAX_HP *= (1.0 - hp_reduction)
+
+	Global.set_hp_progress(player.hp / player.MAX_HP)
+
 	if Global.debug:
 		print("UPGRADED")

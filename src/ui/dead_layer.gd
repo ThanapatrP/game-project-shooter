@@ -50,7 +50,7 @@ func countup_digit_score():
 
 			await get_tree().create_timer(1.0/60.0).timeout
 	
-	if Global.curr_score == Global.highscore and Global.curr_score != 0:
+	if Global.is_highscore and Global.curr_score != 0:
 		animation_player.play("NewHighscore")
 	else:
 		animation_player.play("NotNewHighscore")

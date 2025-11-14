@@ -167,6 +167,7 @@ offset_right = 658.0
 offset_bottom = 478.0
 mouse_filter = 1
 color = Color(0.221902, 0.221902, 0.221902, 1)
+metadata/_edit_lock_ = true
 
 [node name="TempLevelBg" type="Sprite2D" parent="."]
 z_index = -99
@@ -255,7 +256,7 @@ texture = ExtResource("9_tygi3")
 script = ExtResource("10_twkqo")
 
 [node name="HpIndicator" parent="UILayer" instance=ExtResource("12_av45r")]
-position = Vector2(16, 324)
+position = Vector2(21, 323)
 
 [node name="InvertText" type="RichTextLabel" parent="UILayer"]
 visible = false
@@ -282,6 +283,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="FadeOutRect" type="ColorRect" parent="UILayer"]
 anchors_preset = 15
@@ -290,6 +292,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0)
+metadata/_edit_lock_ = true
 
 [node name="CardLayer" parent="." instance=ExtResource("11_av45r")]
 visible = false

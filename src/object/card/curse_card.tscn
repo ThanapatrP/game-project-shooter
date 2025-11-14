@@ -1,9 +1,32 @@
-[gd_scene load_steps=10 format=3 uid="uid://cbhb18adwsxe1"]
+[gd_scene load_steps=14 format=3 uid="uid://cbhb18adwsxe1"]
 
 [ext_resource type="Script" uid="uid://biyud2pe0gxdk" path="res://src/object/card/curse_card.gd" id="1_xs56f"]
+[ext_resource type="Shader" uid="uid://d28ml218nw3cn" path="res://src/shader/dissolve.gdshader" id="2_gbdaw"]
 [ext_resource type="Texture2D" uid="uid://ckw40mw1iwe87" path="res://asset/ui/card/card_base_spr.png" id="2_p06a0"]
 [ext_resource type="Texture2D" uid="uid://dp623ycnrwtr5" path="res://asset/ui/card/icons/temp_icon.png" id="3_jgh6w"]
 [ext_resource type="FontFile" uid="uid://7ip1rh1cottq" path="res://asset/ui/Smol font.ttf" id="3_p06a0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rdrce"]
+size = Vector2(104, 144)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gbdaw"]
+resource_local_to_scene = true
+noise_type = 3
+frequency = 0.007
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_k41ne"]
+resource_local_to_scene = true
+width = 144
+height = 144
+noise = SubResource("FastNoiseLite_gbdaw")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4tik0"]
+resource_local_to_scene = true
+shader = ExtResource("2_gbdaw")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_k41ne")
+shader_parameter/dissolve_level = 1.0
+shader_parameter/between_gap = 0.1
+shader_parameter/gap_color = Color(1, 0, 0, 1)
 
 [sub_resource type="Shader" id="Shader_jgh6w"]
 code = "shader_type canvas_item;
@@ -12,6 +35,11 @@ uniform vec4 outline_col : source_color = vec4(1,1,1,1);
 uniform bool outline = true;
 uniform vec4 new_col : source_color = vec4(1,1,1,1);
 uniform bool colorize = false;
+//
+//uniform sampler2D noise_tex;
+//uniform float dissolve_level : hint_range(0.0, 1.0, 0.1) = 0.5;
+//uniform float between_gap : hint_range(0.0, 0.5, 0.1) = 0.1;
+//uniform vec4 gap_color : source_color;
 
 uniform vec2 size = vec2(32,32);
 
@@ -36,6 +64,20 @@ void fragment() {
 		}
 	}
 	
+	//float _base = 0.0 - between_gap;
+	//float _ceil = 1.0 + between_gap;
+	//float _block = 1.0 + between_gap;
+	//
+	//float _lower = clamp(_base + (dissolve_level * _block), 0.0, 1.0);
+	//float _upper = clamp(dissolve_level * _block, 0.0, 1.0);
+	//
+	//vec4 noise_col = texture(noise_tex, UV);
+	//
+	//if (noise_col.r > _upper){
+		//COLOR = vec4(0,0,0,0);
+	//}else if(noise_col.r > _lower){
+		//COLOR = vec4(gap_color.r, gap_color.g, gap_color.b, gap_color.a);
+	//}
 }
 "
 
@@ -89,13 +131,17 @@ shader_parameter/new_col = Color(1, 1, 1, 1)
 shader_parameter/colorize = 0.0
 shader_parameter/size = Vector2(104, 144)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rdrce"]
-size = Vector2(104, 144)
-
 [node name="CurseCard" type="Node2D"]
 script = ExtResource("1_xs56f")
 
-[node name="SpritePivot" type="Node2D" parent="."]
+[node name="MouseArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseArea"]
+position = Vector2(52, 72)
+shape = SubResource("RectangleShape2D_rdrce")
+
+[node name="SpritePivot" type="CanvasGroup" parent="."]
+material = SubResource("ShaderMaterial_4tik0")
 position = Vector2(52, 72)
 
 [node name="CardSprite" type="Sprite2D" parent="SpritePivot"]
@@ -141,9 +187,3 @@ material = SubResource("ShaderMaterial_7qfn2")
 position = Vector2(-52, -72)
 texture = ExtResource("2_p06a0")
 centered = false
-
-[node name="MouseArea" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseArea"]
-position = Vector2(52, 72)
-shape = SubResource("RectangleShape2D_rdrce")

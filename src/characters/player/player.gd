@@ -21,12 +21,14 @@ var invin = -1.0
 var DEF_INVIN = 3.0
 
 # Shoot stuff
-var DEF_SHOOT_CD = 0.1
+var DEF_SHOOT_CD = 0.12
 var shoot_cd = 0.0
 var RELOAD_T = 0.8 # default / max reload cooldown
 var reload_cd = -1.0 # currect cooldown of reload
 var ammo = 30
 var MAX_AMMO = 30
+
+var bullet_spread : float = 1.0 # in degrees
 
 var bullet_dmg_mult : float = 1.0
 
@@ -156,8 +158,7 @@ func _process(delta):
 
 			if Global.hp_indicator:
 				Global.hp_indicator.shake()
-			
-			Global.hp_indicator.set_progress(hp / MAX_HP)
+				Global.set_hp_progress(hp / MAX_HP)
 
 			if hp <= 0.0 and Global.main_level:
 				Global.main_level.restart()
@@ -210,7 +211,10 @@ func shoot():
 	
 	var bullet : Area2D = bullet_res.instantiate()
 	bullet.global_position = global_position
-	bullet.dir = mouse_dir
+	var spread_rad = deg_to_rad(bullet_spread)
+
+	randomize()
+	bullet.dir = mouse_dir.rotated(randf_range(-spread_rad/2, spread_rad))
 
 	bullet.damage *= bullet_dmg_mult # apply damage mult
 

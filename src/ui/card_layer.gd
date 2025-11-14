@@ -8,7 +8,8 @@ var selected = false
 var curses = [
 	preload("res://src/object/card/curse_res/dmg_mult_curse.tres"),
 	preload("res://src/object/card/curse_res/reload_amp_curse.tres"),
-	preload("res://src/object/card/curse_res/reload_amp_curse.tres"), # TEMP
+	preload("res://src/object/card/curse_res/invin_trade_curse.tres"),
+	preload("res://src/object/card/curse_res/uzi_trait_curse.tres"),
 ]
 
 @onready var cards : Array[Node2D] = [
@@ -42,6 +43,14 @@ func _process(delta: float) -> void:
 		
 		if Input.is_action_just_pressed("m1") and hovering_card != null and selected == false:
 			if hovering_card.curse != null and Global.player != null:
+				
+				for c in cards:
+					if c != hovering_card:
+						var tween := create_tween()
+						tween.set_ease(Tween.EASE_OUT)
+						tween.set_trans(Tween.TRANS_SINE)
+						tween.tween_property(c.sprite_pivot.material, "shader_parameter/dissolve_level", 0.0, 0.35)
+
 				hovering_card.curse.apply(Global.player)
 				Global.player_card += 1
 				
@@ -77,6 +86,7 @@ func activate_ui():
 
 	for c in cards:
 		c.can_hover = true
+		c.sprite_pivot.material.set_shader_parameter("dissolve_level", 1.0);
 
 	# TODO: Randomize curse stuff
 	# TODO: animate stuff

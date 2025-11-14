@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 		spr_t = 0.0
 
 	# Sprite shake position
-	position.x = SHAKE_INTENSITY * cos(shake_t * 100.0) * (shake_t / DEF_SHAKE_DUR)
+	position.x = 6 + (SHAKE_INTENSITY * cos(shake_t * 100.0) * (shake_t / DEF_SHAKE_DUR))
 	
 	# Progress 
 	idle_icon.material.set_shader_parameter("progress", to_progress)
