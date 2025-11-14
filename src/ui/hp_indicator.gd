@@ -1,7 +1,7 @@
 extends Node2D
 
 const SHAKE_INTENSITY = 8
-const DEF_SHAKE_DUR := 0.8
+const DEF_SHAKE_DUR := 1.2
 var shake_t := 0.0
 
 const DEF_SPR_DUR := 0.3

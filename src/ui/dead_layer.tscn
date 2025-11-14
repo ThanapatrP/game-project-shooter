@@ -1,58 +1,68 @@
-[gd_scene load_steps=7 format=3 uid="uid://cnjx74rxponyl"]
+[gd_scene load_steps=13 format=3 uid="uid://cnjx74rxponyl"]
 
 [ext_resource type="FontFile" uid="uid://cq720iumon812" path="res://asset/ui/Cardo-Bold.ttf" id="1_57dqn"]
 [ext_resource type="Script" uid="uid://cwhify4jfo0rd" path="res://src/ui/dead_layer.gd" id="1_adk6k"]
+[ext_resource type="Texture2D" uid="uid://dob15ajkb0jnp" path="res://asset/ui/main_ui/hp_icon_hurt_v2.png" id="3_80c0p"]
+
+[sub_resource type="Gradient" id="Gradient_80c0p"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="Gradient" id="Gradient_isgm0"]
+offsets = PackedFloat32Array(0, 0.190184, 0.349693, 0.48773, 0.638037, 0.800614, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.483333, 0, 1, 1, 0.95, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0.7, 0, 1, 1)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3ksew"]
 light_mode = 1
 
-[sub_resource type="Animation" id="Animation_adk6k"]
-resource_name = "StartDisplay"
-length = 0.9
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_adk6k"]
+light_mode = 1
+
+[sub_resource type="Animation" id="Animation_isgm0"]
+resource_name = "NewHighscore"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("DeadLabel:text")
+tracks/0/path = NodePath("DeadLabel:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.166667, 0.233333),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": ["[shake rate=100 level=50]YOU'RE DEAD!", "[shake rate=100 level=50]YOU'RE DEAD!", "[shake rate=100 level=25]YOU'RE DEAD!", "YOU'RE DEAD!"]
+"values": [true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("DeadLabel:visible")
+tracks/1/path = NodePath("ScoreHeader:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false, true]
+"values": [true]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("ScoreHeader:visible")
+tracks/2/path = NodePath("ScoreDigitLabel:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.566667),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false, true]
+"values": [true]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("ScoreDigitLabel:visible")
+tracks/3/path = NodePath("NewHighscoreLabel:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.9),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -60,50 +70,65 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("NewHighscoreLabel:visible")
+tracks/4/path = NodePath("CPUParticles2D:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.2),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("OldHighscoreHeader:visible")
+tracks/5/path = NodePath("RestartPrompt:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.966667),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false]
+"values": [false, true]
 }
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("OldHighscoreDigitLabel:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+
+[sub_resource type="Animation" id="Animation_lxt08"]
+resource_name = "NotNewHighscore"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OldHighscoreHeader:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false]
+"values": [false, true]
 }
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("RestartPrompt:visible")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OldHighscoreDigitLabel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false]
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RestartPrompt:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.866667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_80c0p"]
@@ -205,8 +230,110 @@ tracks/7/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_adk6k"]
+resource_name = "StartDisplay"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DeadLabel:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.166667, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": ["[shake rate=100 level=50]YOU'RE DEAD!", "[shake rate=100 level=50]YOU'RE DEAD!", "[shake rate=100 level=25]YOU'RE DEAD!", "YOU'RE DEAD!"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DeadLabel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScoreHeader:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.566667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ScoreDigitLabel:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("NewHighscoreLabel:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("OldHighscoreHeader:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("OldHighscoreDigitLabel:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("RestartPrompt:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_80c0p"]
 _data = {
+&"NewHighscore": SubResource("Animation_isgm0"),
+&"NotNewHighscore": SubResource("Animation_lxt08"),
 &"RESET": SubResource("Animation_80c0p"),
 &"StartDisplay": SubResource("Animation_adk6k")
 }
@@ -214,6 +341,29 @@ _data = {
 [node name="DeadLayer" type="CanvasLayer"]
 layer = 4
 script = ExtResource("1_adk6k")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(275, 222)
+emitting = false
+amount = 32
+texture = ExtResource("3_80c0p")
+one_shot = true
+explosiveness = 1.0
+randomness = 0.21
+lifetime_randomness = 0.24
+emission_shape = 3
+emission_rect_extents = Vector2(60, 5)
+spread = 180.0
+initial_velocity_min = 234.93
+initial_velocity_max = 337.73
+angular_velocity_min = -90.0
+angular_velocity_max = 90.0
+angle_min = 36.7
+angle_max = 321.0
+scale_amount_min = 0.1
+scale_amount_max = 0.3
+color_ramp = SubResource("Gradient_80c0p")
+color_initial_ramp = SubResource("Gradient_isgm0")
 
 [node name="DeadLabel" type="RichTextLabel" parent="."]
 visible = false
@@ -273,7 +423,7 @@ vertical_alignment = 1
 
 [node name="NewHighscoreLabel" type="RichTextLabel" parent="."]
 visible = false
-material = SubResource("CanvasItemMaterial_3ksew")
+material = SubResource("CanvasItemMaterial_adk6k")
 clip_contents = false
 anchors_preset = 10
 anchor_right = 1.0

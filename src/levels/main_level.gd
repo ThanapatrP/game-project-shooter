@@ -2,9 +2,11 @@ extends Node2D
 
 # TUTORIAL
 enum TUTORIAL_STATE{
+	NONE,
 	MOVEMENT,
 	SHOOT,
-	LIGHT
+	LIGHT,
+	KILLEM,
 }
 var curr_tutorial_state = TUTORIAL_STATE.MOVEMENT
 var player_complete_step = false
@@ -43,13 +45,22 @@ func _exit_tree() -> void:
 
 
 func _process(delta: float) -> void:
-	if $UILayer/InvertText/AnimationPlayer:
-		$UILayer/InvertText/AnimationPlayer.speed_scale = 1.0 / Engine.time_scale
+	if Global.invert_text:
+		Global.invert_text.get_node("AnimationPlayer").speed_scale = 1.0 / Engine.time_scale
 	if Global.debug:
 		pass
 		# print($UILayer/InvertText.visible)
 	
-	tutorial_queue()
+	if curr_tutorial_state != TUTORIAL_STATE.NONE:
+		if Input.is_action_just_pressed("spacebar"):
+			curr_tutorial_state = TUTORIAL_STATE.KILLEM
+
+			var tween := create_tween()
+			tween.set_ease(Tween.EASE_IN_OUT)
+			tween.set_trans(Tween.TRANS_SINE)
+			tween.tween_property(center_light, "scale", Vector2(), 0.7)
+
+		tutorial_queue()
 
 func restart():
 	$UILayer/ImpactFrame.visible = true
@@ -64,10 +75,6 @@ func restart():
 		node.queue_free()
 
 	add_child(dead_layer.instantiate())
-
-	await get_tree().create_timer(5).timeout
-	get_tree().reload_current_scene()
-	pass
 
 func tutorial_queue():
 	match curr_tutorial_state:
@@ -137,6 +144,9 @@ func tutorial_queue():
 				generic_sprite.visible = false
 				await get_tree().create_timer(0.4).timeout
 
+				curr_tutorial_state = TUTORIAL_STATE.KILLEM
+
+		TUTORIAL_STATE.KILLEM:
 				if Global.invert_text:
 					generic_sprite.visible = false
 
@@ -150,6 +160,6 @@ func tutorial_queue():
 
 				$Spawner.curr_spawn_t = 1
 
-				curr_tutorial_state = -1
+				curr_tutorial_state = TUTORIAL_STATE.NONE
 
 				player_complete_step = false

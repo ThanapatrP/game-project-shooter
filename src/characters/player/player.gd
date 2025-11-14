@@ -176,6 +176,10 @@ func _process(delta):
 func _physics_process(delta):
 	var light_lerp_pow = 0.5
 
+	# if Input.is_action_just_pressed("spacebar") and Global.debug:
+	# 	Global.main_level.restart()
+	# 	queue_free()
+
 	# Active light stuff
 	if Input.is_action_pressed("m2") and light_active:
 		light_pivot.global_position = lerp($LightPivot.global_position, get_global_mouse_position(), light_lerp_pow * delta * 60)

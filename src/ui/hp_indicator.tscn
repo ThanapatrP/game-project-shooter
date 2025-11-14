@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://b7id8jp6jhyg" path="res://src/ui/hp_indicator.gd" id="1_ak0bf"]
 [ext_resource type="Shader" uid="uid://b053p3uxne8cc" path="res://src/shader/hp_icon_shader.gdshader" id="2_r3y54"]
-[ext_resource type="Texture2D" uid="uid://c1t4sja3src4e" path="res://asset/ui/main_ui/hp_icon.png" id="3_ough7"]
-[ext_resource type="Texture2D" uid="uid://b1vxtcwce4k0g" path="res://asset/ui/main_ui/hp_icon_hurt.png" id="4_bskdi"]
+[ext_resource type="Texture2D" uid="uid://2diteak71p0q" path="res://asset/ui/main_ui/hp_icon_v2.png" id="3_ak0bf"]
+[ext_resource type="Texture2D" uid="uid://dob15ajkb0jnp" path="res://asset/ui/main_ui/hp_icon_hurt_v2.png" id="4_ak0bf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3ksew"]
 shader = ExtResource("2_r3y54")
@@ -28,12 +28,12 @@ script = ExtResource("1_ak0bf")
 
 [node name="IdleIcon" type="Sprite2D" parent="Pivot"]
 material = SubResource("ShaderMaterial_3ksew")
-position = Vector2(7, 7)
-texture = ExtResource("3_ough7")
+position = Vector2(6, 5)
+texture = ExtResource("3_ak0bf")
 centered = false
 
 [node name="HurtIcon" type="Sprite2D" parent="Pivot"]
 material = SubResource("ShaderMaterial_ul4kp")
-position = Vector2(4, 4)
-texture = ExtResource("4_bskdi")
+position = Vector2(6, 5)
+texture = ExtResource("4_ak0bf")
 centered = false

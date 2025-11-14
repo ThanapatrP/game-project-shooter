@@ -33,7 +33,22 @@ signal resume
 
 # Debug
 var debug = true
+var running_tween = null
 
+func _ready() -> void:
+	reset_score()
+
+	process_mode = ProcessMode.PROCESS_MODE_ALWAYS
+
+	connect("pause",
+	func():
+		get_tree().paused = true
+	)
+
+	connect("resume",
+	func():
+		get_tree().paused = false
+	)
 
 func add_score(amt):
 	if amt < 0:
@@ -42,11 +57,15 @@ func add_score(amt):
 	curr_score += amt
 	score_stack += amt
 
+	if curr_score >= highscore:
+		highscore = curr_score
+
 	if score_stack > next_card_score:
 		score_stack = 0
 		next_card_score *= 1.2
 		if card_layer: # next card
 			var tween := create_tween()
+			running_tween = tween
 			tween.set_ignore_time_scale()
 
 			if invert_text:
@@ -54,6 +73,9 @@ func add_score(amt):
 				invert_text.get_node("AnimationPlayer").play("LevelUpBlink")
 
 			await tween.tween_property(Engine, "time_scale", 0.01, 0.7).finished
+
+			running_tween = null
+			tween.kill()
 
 			if invert_text:
 				invert_text.get_node("AnimationPlayer").stop()
@@ -87,21 +109,6 @@ func reset_score():
 func load_data():
 	pass
 
-
-func _ready() -> void:
-	reset_score()
-
-	process_mode = ProcessMode.PROCESS_MODE_ALWAYS
-
-	connect("pause",
-	func():
-		get_tree().paused = true
-	)
-
-	connect("resume",
-	func():
-		get_tree().paused = false
-	)
 
 
 # func _process(delta: float) -> void:
