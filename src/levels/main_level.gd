@@ -15,6 +15,8 @@ var wasd_sprite_frame : SpriteFrames = preload("res://src/ui/tutorial/sprite_fra
 var m1_sprite_frame : SpriteFrames = preload("res://src/ui/tutorial/sprite_frame/m1_sprite_frame.tres")
 var m2_sprite_frame : SpriteFrames = preload("res://src/ui/tutorial/sprite_frame/m2_sprite_frame.tres")
 
+var hurt_sfx = preload("res://asset/sfx/cat_hurt_sfx.mp3")
+
 var dead_layer = preload("res://src/ui/dead_layer.tscn")
 
 @onready var generic_label : RichTextLabel = $GenericLabel
@@ -63,6 +65,9 @@ func _process(delta: float) -> void:
 		tutorial_queue()
 
 func restart():
+	if Global.is_highscore:
+		Global.save_highscore()
+
 	$UILayer/ImpactFrame.visible = true
 
 	await get_tree().create_timer(3.0/60.0).timeout
@@ -73,6 +78,15 @@ func restart():
 
 	for node in get_children():
 		node.queue_free()
+
+	var audio_player = AudioStreamPlayer.new()
+	audio_player.stream = hurt_sfx
+	audio_player.autoplay = false
+	audio_player.bus = "SFX"
+
+	add_child(audio_player)
+
+	audio_player.play()
 
 	add_child(dead_layer.instantiate())
 

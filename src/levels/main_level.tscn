@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://co30y8baliqso"]
+[gd_scene load_steps=27 format=3 uid="uid://co30y8baliqso"]
 
 [ext_resource type="Script" uid="uid://bs38ixu1q2ixm" path="res://src/levels/main_level.gd" id="1_acb5s"]
 [ext_resource type="PackedScene" uid="uid://c2uvr2f2eld2n" path="res://src/characters/player/player.tscn" id="1_b6xw5"]
@@ -11,9 +11,11 @@
 [ext_resource type="Texture2D" uid="uid://bdfs3bbusy52" path="res://asset/ui/ui_overlays/cat_hurts_overlay.png" id="9_tygi3"]
 [ext_resource type="Script" uid="uid://benpvdb4y2nyl" path="res://src/ui/hurt_overlay.gd" id="10_twkqo"]
 [ext_resource type="Shader" uid="uid://h5vycgvjqly1" path="res://src/shader/invert_text.gdshader" id="11_3ksew"]
-[ext_resource type="PackedScene" uid="uid://c8opr81murdxm" path="res://src/ui/card_layer.tscn" id="11_av45r"]
+[ext_resource type="PackedScene" uid="uid://d0gdnghceog14" path="res://src/ui/card_layer.tscn" id="11_av45r"]
 [ext_resource type="FontFile" uid="uid://cq720iumon812" path="res://asset/ui/Cardo-Bold.ttf" id="11_fvmyw"]
 [ext_resource type="PackedScene" uid="uid://cwsp1ptrx6men" path="res://src/ui/hp_indicator.tscn" id="12_av45r"]
+[ext_resource type="AudioStream" uid="uid://d2v35jpgmi1k6" path="res://asset/sfx/level_up_blip.wav" id="13_acb5s"]
+[ext_resource type="AudioStream" uid="uid://bo5tp2qvx08wa" path="res://asset/sfx/BOOM.wav" id="14_ul4kp"]
 
 [sub_resource type="Gradient" id="Gradient_bxhu7"]
 interpolation_mode = 1
@@ -87,6 +89,26 @@ tracks/2/keys = {
 "method": &"shake"
 }]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BoomAudioPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_3ksew"]
 resource_name = "LevelUpBlink"
@@ -114,6 +136,29 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [true, false, true, false, true, false, true, false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LevelUpAudioPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_acb5s"]
@@ -275,6 +320,14 @@ process_mode = 3
 libraries = {
 &"": SubResource("AnimationLibrary_acb5s")
 }
+
+[node name="LevelUpAudioPlayer" type="AudioStreamPlayer" parent="UILayer/InvertText"]
+stream = ExtResource("13_acb5s")
+volume_db = -5.0
+
+[node name="BoomAudioPlayer" type="AudioStreamPlayer" parent="UILayer/InvertText"]
+stream = ExtResource("14_ul4kp")
+volume_db = -5.0
 
 [node name="ImpactFrame" type="ColorRect" parent="UILayer"]
 visible = false

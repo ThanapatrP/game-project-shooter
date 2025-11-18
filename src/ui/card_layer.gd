@@ -10,6 +10,8 @@ var curses = [
 	preload("res://src/object/card/curse_res/reload_amp_curse.tres"),
 	preload("res://src/object/card/curse_res/invin_trade_curse.tres"),
 	preload("res://src/object/card/curse_res/uzi_trait_curse.tres"),
+	preload("res://src/object/card/curse_res/longer_light_curse.tres"),
+	preload("res://src/object/card/curse_res/bigger_light_curse.tres"),
 ]
 
 @onready var cards : Array[Node2D] = [
@@ -27,7 +29,6 @@ func _exit_tree() -> void:
 
 
 func _ready() -> void:
-	assign_shuffle()
 
 	visible = active
 
@@ -55,9 +56,11 @@ func _process(delta: float) -> void:
 				Global.player_card += 1
 				
 				# JUICE
+				randomize()
+				var juice_rot_deg = 5
 				hovering_card.flash()
-				hovering_card.sprite_pivot.scale = Vector2(1.2, 1.2)
-				hovering_card.sprite_pivot.rotation_degrees = 15
+				hovering_card.sprite_pivot.scale = Vector2(0.6, 0.6)
+				hovering_card.sprite_pivot.rotation_degrees = randf_range(-juice_rot_deg, juice_rot_deg)
 
 				if Global.cursor:
 					Global.cursor.set_cursor_transform(Vector2(1.2,1.2), -5)
@@ -91,6 +94,7 @@ func activate_ui():
 	# TODO: Randomize curse stuff
 	# TODO: animate stuff
 
+	assign_shuffle()
 	Global.emit_signal("pause")
 
 			
@@ -114,9 +118,12 @@ func deactivate_ui():
 
 func assign_shuffle():
 	randomize()
-
 	var shuffled_curses = curses.duplicate()
 	shuffled_curses.shuffle()
+
+	shuffled_curses[0].update_info()
+	shuffled_curses[1].update_info()
+	shuffled_curses[2].update_info()
 
 	cards[0].curse = shuffled_curses[0]
 	cards[1].curse = shuffled_curses[1]

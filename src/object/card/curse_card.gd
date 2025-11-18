@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 	if curse != null:
 		curse_icon.texture = curse.curse_icon
 		curse_display_name.text = curse.display_name
-		curse_desc.text = curse.desc
+		curse_desc.text = curse.get_desc()
 
 
 

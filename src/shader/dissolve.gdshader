@@ -29,7 +29,7 @@ void fragment() {
 	if (noise_col.r > _upper){
 		COLOR = vec4(0,0,0,0);
 	}else if(noise_col.r > _lower){
-		COLOR = vec4(gap_color.r, gap_color.g, gap_color.b, gap_color.a);
+		COLOR = vec4(gap_color.r, gap_color.g, gap_color.b, 1);
 	}
 }
 

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="InvinTradeCurse" load_steps=3 format=3 uid="uid://bu1np5iujg6d0"]
 
-[ext_resource type="Texture2D" uid="uid://bjgf0c7o0x3ay" path="res://asset/player/player_spr_v1.png" id="1_1cppo"]
+[ext_resource type="Texture2D" uid="uid://c3v6jsb6sp6gq" path="res://asset/ui/card/icons/invin_trade_icon.png" id="1_1cppo"]
 [ext_resource type="Script" uid="uid://bxua2jk7gdx54" path="res://src/object/card/curses/invin_trade.gd" id="1_swkxe"]
 
 [resource]
@@ -8,6 +8,5 @@ script = ExtResource("1_swkxe")
 hp_mult = 0.1
 invin_decrese = 0.2
 curse_icon = ExtResource("1_1cppo")
-display_name = "INVIN TRADE"
+display_name = "SLEEPER BUILD"
 desc = "DESC"
-metadata/_custom_type_script = "uid://bxua2jk7gdx54"

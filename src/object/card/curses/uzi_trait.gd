@@ -15,3 +15,6 @@ func apply(player : Player):
 
 	if Global.debug:
 		print("UPGRADED")
+
+func get_desc() -> String:
+	return "[color=green]Increase firerate by {0}%[/color]\n[color=red]Decrease accuracy by {1}%".format([int(firerate_mult * 100), int(accuracy_decrease * 100)])

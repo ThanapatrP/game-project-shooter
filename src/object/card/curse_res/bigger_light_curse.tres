@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BiggerLightCurse" load_steps=3 format=3 uid="uid://pcmxfiudc4fl"]
+
+[ext_resource type="Script" uid="uid://cdnalv874rxk5" path="res://src/object/card/curses/bigger_light.gd" id="1_ky7wr"]
+[ext_resource type="Texture2D" uid="uid://br8hmadmg1hwk" path="res://asset/ui/card/icons/bigger_light_icon.png" id="1_ykaap"]
+
+[resource]
+script = ExtResource("1_ky7wr")
+ammo_decrease = 0.1
+light_scope_mult = 0.1
+curse_icon = ExtResource("1_ykaap")
+display_name = "POWERFUL WEAK"
+metadata/_custom_type_script = "uid://cdnalv874rxk5"

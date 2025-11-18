@@ -18,4 +18,5 @@ func apply(player : Player):
 	if Global.debug:
 		print("UPGRADED")
 
-
+func get_desc() -> String:
+	return "[color=green]Reload faster by {0}%[/color]\n[color=red]Decrease ammo capacity by {1}%".format([int(reload_reduction * 100), int(ammo_cap_reduction * 100)])

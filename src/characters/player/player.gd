@@ -50,9 +50,12 @@ var sfx_reload_complete = preload("res://asset/sfx/reload_complete.mp3")
 
 
 # Node ref
+@onready var player_sprite := $PlayerSprite
+@onready var pos_marker := $PositionMarker
 @onready var light_pivot := $LightPivot
 @onready var point_light := $LightPivot/PointLight2D
 @onready var gun_audio_stream : AudioStreamPlayer = $GunAudioStream
+@onready var hurt_audio_stream : AudioStreamPlayer = $HurtAudioStream
 @onready var reload_audio_player : AudioStreamPlayer = $ReloadAudioStream
 @onready var reload_loop_audio_player : AudioStreamPlayer = $ReloadingAudioStream
 @onready var hitbox : Area2D = $Hitbox
@@ -148,6 +151,7 @@ func _process(delta):
 	if hitbox.get_overlapping_bodies().size() > 0 and invin <= 0.0:
 		if hitbox.get_overlapping_bodies()[0] is Enemy:
 			hp -= hitbox.get_overlapping_bodies()[0].damage
+			hurt_audio_stream.play()
 			invin = DEF_INVIN
 
 			if Global.hurt_overlay:
@@ -183,14 +187,14 @@ func _physics_process(delta):
 
 	# Active light stuff
 	if Input.is_action_pressed("m2") and light_active:
-		light_pivot.global_position = lerp($LightPivot.global_position, get_global_mouse_position(), light_lerp_pow * delta * 60)
-		light_pivot.scale = lerp($LightPivot.scale, float_to_vec(cal_light_scale(ACTIVE_LIGHT_SCALE)), light_lerp_pow * delta * 60)
+		light_pivot.global_position = lerp(light_pivot.global_position, get_global_mouse_position(), light_lerp_pow * delta * 60)
+		light_pivot.scale = lerp(light_pivot.scale, float_to_vec(cal_light_scale(ACTIVE_LIGHT_SCALE)), light_lerp_pow * delta * 60)
 		light_pow -= delta
 		if light_pow <= 0.0:
 			light_active = false
 	else:
-		light_pivot.global_position = lerp($LightPivot.global_position, global_position, light_lerp_pow * delta * 60)
-		light_pivot.scale = lerp($LightPivot.scale, float_to_vec(cal_light_scale(PLAYER_LIGHT_SCALE)), light_lerp_pow * delta * 60)
+		light_pivot.global_position = lerp(light_pivot.global_position, global_position, light_lerp_pow * delta * 60)
+		light_pivot.scale = lerp(light_pivot.scale, float_to_vec(cal_light_scale(PLAYER_LIGHT_SCALE)), light_lerp_pow * delta * 60)
 		light_pow += delta * 2.0
 		if light_pow > DEF_LIGHT_POW/2.0:
 			light_active = true

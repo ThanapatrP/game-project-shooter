@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LongerLightCurse" load_steps=3 format=3 uid="uid://bt22acwdn5f7l"]
+
+[ext_resource type="Script" uid="uid://84xbbh5tg086" path="res://src/object/card/curses/longer_light.gd" id="1_1mqwr"]
+[ext_resource type="Texture2D" uid="uid://drjxmjthfl3d" path="res://asset/ui/card/icons/longer_light_icon.png" id="1_nutp8"]
+
+[resource]
+script = ExtResource("1_1mqwr")
+light_t_mult = 0.05
+light_scope_decrease = 0.1
+curse_icon = ExtResource("1_nutp8")
+display_name = "LEAN IT"
+metadata/_custom_type_script = "uid://84xbbh5tg086"

@@ -21,3 +21,6 @@ func apply(player : Player):
 
 	if Global.debug:
 		print("UPGRADED")
+
+func get_desc() -> String:
+	return "[color=green]Decrease max HP (& current HP) by {0}%[/color]\n[color=red]Decrease invincible time by {1}%".format([int(hp_mult * 100), int(invin_decrese * 100)])
