@@ -11,7 +11,9 @@ config_version=5
 [application]
 
 config/name="Project Shooter"
+config/version="0.9"
 run/main_scene="uid://co30y8baliqso"
+config/custom_user_dir_name="hellspotter"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
